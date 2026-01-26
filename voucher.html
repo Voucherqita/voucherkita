@@ -168,7 +168,7 @@ header{padding:16px;background:var(--primary);color:#fff;font-weight:800;font-si
   </div>
 
   <div style="padding:16px; text-align:center; margin-top:16px;">
-    <a href="https://wa.me/62895404663520"
+    <a href="wa.html"
        style="background:#128C7E;color:#fff;padding:16px 18px;border-radius:12px;
               font-weight:700;letter-spacing:0.3px;display:inline-block;width:100%;max-width:280px;
               text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
@@ -507,7 +507,7 @@ function checkout() {
   txt += `Total: ${formatRp(cart.reduce((s,i)=>s+i.qty*i.price,0))}`;
 
   window.open(
-    'https://wa.me/62895404663520?text=' + encodeURIComponent(txt),
+    'wa.html?text=' + encodeURIComponent(txt),
     '_blank'
   );
 }
