@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lacak Stok Alfamart</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#E31E24;
+  --bg:#f5f5f7;
+  --card:#ffffff;
+  --muted:#666;
+  --shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Poppins,sans-serif;
+  background:var(--bg);
+  color:#111;
+}
+header{
+  background:var(--primary);
+  color:#fff;
+  padding:16px;
+  text-align:center;
+  font-weight:700;
+  position:sticky;
+  top:0;
+}
+.back{
+  position:absolute;
+  left:16px;
+  top:16px;
+  cursor:pointer;
+}
+.container{
+  max-width:640px;
+  margin:auto;
+  padding:16px;
+}
+.card{
+  background:var(--card);
+  border-radius:14px;
+  padding:20px;
+  box-shadow:var(--shadow);
+  margin-bottom:16px;
+}
+.card h2{
+  margin-top:0;
+  font-size:18px;
+}
+.step{
+  font-size:14px;
+  margin-bottom:10px;
+}
+.btn-wa{
+  display:block;
+  width:100%;
+  padding:14px;
+  border-radius:10px;
+  background:#128C7E;
+  color:#fff;
+  text-align:center;
+  text-decoration:none;
+  font-weight:600;
+  margin-top:18px;
+}
+.note{
+  font-size:12px;
+  color:#666;
+  margin-top:16px;
+  text-align:center;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <span class="back" onclick="history.back()">⬅️</span>
+  Lacak Stok Alfamart
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>Langkah Mengirim Lokasi</h2>
+
+    <div class="step"><b>1.</b> Pastikan lokasi (GPS) di HP Anda aktif</div>
+    <div class="step"><b>2.</b> Klik tombol <b>Kirim Lokasi</b> di bawah</div>
+    <div class="step"><b>3.</b> Kirim <b>Share Location</b> ke WhatsApp kami</div>
+
+    <div style="font-size:12px;color:#555;margin-top:8px">
+      *Lokasi akan digunakan untuk mendeteksi Alfamart terdekat secara otomatis
+    </div>
+
+    <a class="btn-wa"
+       href="https://wa.me/62895404663519?text=Halo,%20saya%20ingin%20cek%20stok%20Alfamart.%0A%0AShare%20location:"
+       target="_blank">
+      Kirim Lokasi via WhatsApp
+    </a>
+
+    <div class="note">
+      ℹ️ Pengecekan stok dilakukan secara otomatis berdasarkan lokasi
+      dan dapat berbeda dengan kondisi aktual di toko.
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

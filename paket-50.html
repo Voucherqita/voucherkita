@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paket Voucher 50</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#5b2c98;
+  --bg:#f5f5f7;
+  --card:#ffffff;
+  --muted:#666;
+  --success:#128C7E;
+  --shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Poppins,sans-serif;
+  background:var(--bg);
+  color:#111;
+}
+header{
+  background:var(--primary);
+  color:#fff;
+  padding:16px;
+  text-align:center;
+  position:sticky;
+  top:0;
+}
+header .back{
+  position:absolute;
+  left:16px;
+  top:16px;
+  cursor:pointer;
+}
+.container{
+  max-width:640px;
+  margin:auto;
+  padding:16px;
+}
+.card{
+  background:var(--card);
+  border-radius:16px;
+  padding:22px;
+  box-shadow:var(--shadow);
+  margin-bottom:18px;
+}
+.card h2{
+  margin-top:0;
+  font-size:18px;
+}
+.card p{
+  font-size:13px;
+  color:var(--muted);
+}
+.price-box{
+  background:#f1f3f6;
+  border-radius:12px;
+  padding:14px;
+  font-size:14px;
+  margin-bottom:16px;
+}
+.field{
+  margin-bottom:14px;
+}
+label{
+  font-weight:600;
+  font-size:14px;
+}
+input{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #ddd;
+  font-size:15px;
+  margin-top:6px;
+}
+button{
+  width:100%;
+  padding:14px;
+  border-radius:12px;
+  border:none;
+  font-weight:700;
+  font-size:15px;
+  cursor:pointer;
+}
+.btn-check{
+  background:var(--primary);
+  color:#fff;
+}
+.btn-secondary{
+  background:#ddd;
+}
+.btn-wa{
+  background:var(--success);
+  color:#fff;
+}
+.hidden{display:none}
+.summary{
+  background:#f1f3f6;
+  border-radius:12px;
+  padding:14px;
+  font-size:14px;
+}
+.note{
+  font-size:12px;
+  color:#666;
+  text-align:center;
+  margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <span class="back" onclick="history.back()">⬅️</span>
+  Paket Voucher 50
+</header>
+
+<div class="container">
+
+  <!-- INPUT KOMPOSISI -->
+  <div class="card" id="formBox">
+    <h2>Atur Komposisi Voucher</h2>
+
+    <div class="price-box">
+      <b>Paket Voucher 50</b><br>
+      Denom: 100.000<br>
+      Harga paket: <b>87.000 / voucher</b><br>
+      Diskon: 1.000 / voucher<br>
+      <br>
+      <b>Total Bayar: Rp 4.350.000</b>
+    </div>
+
+    <p>
+      Silakan tentukan jumlah voucher Indomaret dan Alfamart.
+      Total voucher harus berjumlah <b>50</b>.
+    </p>
+
+    <div class="field">
+      <label>Voucher Indomaret</label>
+      <input type="number" id="indo" placeholder="Masukkan jumlah">
+    </div>
+
+    <div class="field">
+      <label>Voucher Alfamart</label>
+      <input type="number" id="alfa" placeholder="Masukkan jumlah">
+    </div>
+
+    <button class="btn-check" onclick="cekKomposisi()">
+      Cek Komposisi
+    </button>
+  </div>
+
+  <!-- KONFIRMASI -->
+  <div class="card hidden" id="confirmBox">
+    <h2>Konfirmasi Pesanan</h2>
+
+    <div class="summary" id="summaryText"></div>
+
+    <button style="margin-top:12px" class="btn-secondary" onclick="ubah()">
+      Ubah
+    </button>
+
+    <button style="margin-top:10px" class="btn-wa" onclick="lanjutWA()">
+      Lanjutkan ke WhatsApp
+    </button>
+  </div>
+
+</div>
+
+<script>
+const HARGA = 87000;
+const TOTAL_VOUCHER = 50;
+
+function rupiah(n){
+  return 'Rp ' + n.toLocaleString('id-ID');
+}
+
+function cekKomposisi(){
+  const indo = parseInt(document.getElementById('indo').value) || 0;
+  const alfa = parseInt(document.getElementById('alfa').value) || 0;
+  const total = indo + alfa;
+
+  if(total !== TOTAL_VOUCHER){
+    alert('Total voucher harus berjumlah ' + TOTAL_VOUCHER);
+    return;
+  }
+
+  const totalBayar = HARGA * TOTAL_VOUCHER;
+
+  document.getElementById('summaryText').innerHTML = `
+    <b>Mohon periksa kembali pesanan Anda:</b><br><br>
+    Paket: <b>50 Voucher</b><br>
+    Denom: <b>100.000</b><br>
+    Harga: <b>${rupiah(HARGA)} / voucher</b><br>
+    Total Bayar: <b>${rupiah(totalBayar)}</b><br><br>
+    Indomaret: <b>${indo}</b> voucher<br>
+    Alfamart: <b>${alfa}</b> voucher
+  `;
+
+  document.getElementById('formBox').classList.add('hidden');
+  document.getElementById('confirmBox').classList.remove('hidden');
+}
+
+function ubah(){
+  document.getElementById('confirmBox').classList.add('hidden');
+  document.getElementById('formBox').classList.remove('hidden');
+}
+
+function lanjutWA(){
+  const indo = document.getElementById('indo').value || 0;
+  const alfa = document.getElementById('alfa').value || 0;
+  const totalBayar = HARGA * TOTAL_VOUCHER;
+
+  const msg =
+`Halo, saya ingin pesan Paket Voucher Pilihan.
+
+Paket: 50 Voucher
+Denom: 100.000
+Harga: ${rupiah(HARGA)} / voucher
+Total Bayar: ${rupiah(totalBayar)}
+
+Indomaret: ${indo} voucher
+Alfamart: ${alfa} voucher`;
+
+  window.open(
+    'https://wa.me/62895404663520?text=' + encodeURIComponent(msg),
+    '_blank'
+  );
+}
+</script>
+
+</body>
+</html>

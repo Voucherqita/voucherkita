@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Penghitungan Modal</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#5b2c98; --bg:#f5f5f7; --card:#fff; --muted:#666;
+  --shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Poppins,sans-serif;background:var(--bg)}
+header{
+  background:var(--primary);color:#fff;padding:16px;text-align:center;
+  position:sticky;top:0
+}
+header .back{position:absolute;left:16px;top:16px;cursor:pointer}
+.container{max-width:640px;margin:auto;padding:16px}
+.card{background:var(--card);border-radius:16px;padding:22px;box-shadow:var(--shadow)}
+.field{margin-bottom:14px}
+label{font-weight:600;font-size:14px}
+input{
+  width:100%;padding:12px;border-radius:10px;border:1px solid #ddd;margin-top:6px
+}
+.small{font-size:12px;color:var(--muted);margin-top:4px}
+.btn{width:100%;padding:14px;border-radius:12px;border:none;font-weight:700;cursor:pointer}
+.btn-main{background:var(--primary);color:#fff}
+.btn-reset{background:#ddd;color:#333}
+.btn-copy{background:#128C7E;color:#fff}
+.btn-group{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.result{
+  margin-top:16px;background:#f1f3f6;border-radius:12px;
+  padding:14px;font-size:14px;white-space:pre-line
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <span class="back" onclick="history.back()">⬅️</span>
+  Penghitungan Modal
+</header>
+
+<div class="container">
+<div class="card">
+
+  <div class="field">
+    <label>Harga Barang (TOTAL)</label>
+    <input type="text" id="hargaBarang" placeholder="Contoh: 350.000">
+  </div>
+
+  <div class="field">
+    <label>Jumlah Voucher</label>
+    <input type="number" id="jumlahVoucher">
+    <div class="small" id="infoVoucher"></div>
+  </div>
+
+  <div class="field">
+    <label>Harga Voucher (per voucher)</label>
+    <input type="text" id="hargaVoucher" placeholder="Contoh: 88.000">
+  </div>
+
+  <button class="btn btn-main" onclick="hitung()">Hitung Modal</button>
+
+  <div class="btn-group">
+    <button class="btn btn-reset" onclick="resetForm()">Reset</button>
+    <button class="btn btn-copy" onclick="copyResult()">Salin Hasil</button>
+  </div>
+
+  <div class="result" id="hasil" style="display:none"></div>
+
+</div>
+</div>
+
+<script>
+const DENOM = 100000;
+
+function rp(n){ return 'Rp ' + n.toLocaleString('id-ID'); }
+function clean(v){ return parseInt(v.replace(/\./g,'')) || 0; }
+function format(el){
+  el.value = el.value.replace(/\D/g,'')
+                     .replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+}
+
+hargaBarang.oninput = ()=>{
+  format(hargaBarang);
+  updateMaxVoucher();
+};
+hargaVoucher.oninput = ()=>format(hargaVoucher);
+
+function updateMaxVoucher(){
+  const harga = clean(hargaBarang.value);
+  const max = Math.floor(harga / DENOM);
+  jumlahVoucher.max = max;
+  infoVoucher.textContent = max > 0
+    ? `Maksimal ${max} voucher`
+    : `Belanja belum cukup untuk pakai voucher`;
+  if(jumlahVoucher.value > max){
+    jumlahVoucher.value = max;
+  }
+}
+
+function hitung(){
+  const harga = clean(hargaBarang.value);
+  const qtyV = parseInt(jumlahVoucher.value) || 0;
+  const hargaV = clean(hargaVoucher.value);
+
+  const max = Math.floor(harga / DENOM);
+  if(qtyV > max){
+    jumlahVoucher.value = max;
+    return;
+  }
+  if(!harga || !hargaV){
+    alert('Lengkapi semua data');
+    return;
+  }
+
+  const nilaiVoucher = qtyV * DENOM;
+  const modalVoucher = qtyV * hargaV;
+  let sisa = harga - nilaiVoucher;
+  if(sisa < 0) sisa = 0;
+
+  const totalModal = modalVoucher + sisa;
+
+  hasil.style.display='block';
+  hasil.textContent =
+`Hasil Perhitungan
+
+Total Nilai Voucher: ${rp(nilaiVoucher)}
+Modal Voucher: ${rp(modalVoucher)}
+Sisa Bayar: ${rp(sisa)}
+
+TOTAL MODAL: ${rp(totalModal)}`;
+}
+
+function resetForm(){
+  hargaBarang.value = '';
+  jumlahVoucher.value = '';
+  hargaVoucher.value = '';
+  infoVoucher.textContent = '';
+  hasil.style.display = 'none';
+  hasil.textContent = '';
+}
+
+function copyResult(){
+  if(hasil.style.display === 'none'){
+    alert('Belum ada hasil untuk disalin');
+    return;
+  }
+
+  const temp = document.createElement('textarea');
+  temp.value = hasil.textContent;
+  document.body.appendChild(temp);
+  temp.select();
+  temp.setSelectionRange(0, 99999); // untuk HP
+
+  try {
+    document.execCommand('copy');
+    alert('Hasil berhasil disalin');
+  } catch (err) {
+    alert('Gagal menyalin, silakan salin manual');
+  }
+
+  document.body.removeChild(temp);
+}
+</script>
+
+</body>
+</html>

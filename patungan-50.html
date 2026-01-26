@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Patungan 50 Voucher</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#5b2c98;
+  --bg:#f5f5f7;
+  --card:#fff;
+  --muted:#666;
+  --success:#128C7E;
+  --shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Poppins,sans-serif;
+  background:var(--bg);
+}
+header{
+  background:var(--primary);
+  color:#fff;
+  padding:16px;
+  text-align:center;
+  position:sticky;
+  top:0;
+}
+header .back{
+  position:absolute;
+  left:16px;
+  top:16px;
+  cursor:pointer;
+}
+.container{
+  max-width:640px;
+  margin:auto;
+  padding:16px;
+}
+.card{
+  background:var(--card);
+  border-radius:16px;
+  padding:22px;
+  box-shadow:var(--shadow);
+  margin-bottom:18px;
+}
+.price{
+  background:#f1f3f6;
+  border-radius:12px;
+  padding:14px;
+  font-size:14px;
+  margin-bottom:18px;
+}
+.field{
+  margin-bottom:14px;
+}
+label{
+  font-weight:600;
+  font-size:14px;
+}
+input{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #ddd;
+  margin-top:6px;
+}
+button{
+  width:100%;
+  padding:14px;
+  border-radius:12px;
+  border:none;
+  font-weight:700;
+  cursor:pointer;
+}
+.btn{
+  background:var(--primary);
+  color:#fff;
+}
+.btn2{
+  background:#ddd;
+}
+.btnwa{
+  background:var(--success);
+  color:#fff;
+}
+.hidden{display:none}
+.summary{
+  background:#f1f3f6;
+  border-radius:12px;
+  padding:14px;
+  font-size:14px;
+}
+.small{
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:6px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <span class="back" onclick="history.back()">⬅️</span>
+  Patungan 50 Voucher
+</header>
+
+<div class="container">
+
+<div class="card" id="formBox">
+  <div class="price">
+    <b>Patungan 50 Voucher</b><br>
+    Denom: 100.000<br>
+    Harga: <b>87.000 / voucher</b><br>
+    <b>Total Paket: Rp 4.350.000</b>
+  </div>
+
+  <div class="small">Peserta 1</div>
+  <div class="field">
+    <label>Nomor WhatsApp</label>
+    <input type="number" id="wa1" placeholder="08xxxxxxxxxx">
+  </div>
+  <div class="field">
+    <label>Jumlah Voucher</label>
+    <input type="number" id="qty1">
+  </div>
+
+  <div class="small">Peserta 2</div>
+  <div class="field">
+    <label>Nomor WhatsApp</label>
+    <input type="number" id="wa2" placeholder="08xxxxxxxxxx">
+  </div>
+  <div class="field">
+    <label>Jumlah Voucher</label>
+    <input type="number" id="qty2">
+  </div>
+
+  <div class="small">Peserta 3 (opsional)</div>
+  <div class="field">
+    <label>Nomor WhatsApp</label>
+    <input type="number" id="wa3" placeholder="08xxxxxxxxxx">
+  </div>
+  <div class="field">
+    <label>Jumlah Voucher</label>
+    <input type="number" id="qty3">
+  </div>
+
+  <button class="btn" onclick="cek()">Cek Patungan</button>
+</div>
+
+<div class="card hidden" id="confirmBox">
+  <div class="summary" id="ringkasan"></div>
+  <button class="btn2" style="margin-top:12px" onclick="ubah()">Ubah</button>
+  <button class="btnwa" style="margin-top:10px" onclick="kirimWA()">Lanjutkan ke WhatsApp</button>
+</div>
+
+</div>
+
+<script>
+const TOTAL = 50;
+const HARGA = 87000;
+
+function rp(n){
+  return 'Rp ' + n.toLocaleString('id-ID');
+}
+
+function cek(){
+  const wa1 = document.getElementById('wa1').value.trim();
+  const wa2 = document.getElementById('wa2').value.trim();
+  const wa3 = document.getElementById('wa3').value.trim();
+
+  const q1 = parseInt(document.getElementById('qty1').value) || 0;
+  const q2 = parseInt(document.getElementById('qty2').value) || 0;
+  const q3 = parseInt(document.getElementById('qty3').value) || 0;
+
+  if(!wa1 || !wa2){
+    alert('Minimal 2 peserta harus diisi');
+    return;
+  }
+
+  if(q1 + q2 + q3 !== TOTAL){
+    alert('Total voucher harus tepat ' + TOTAL);
+    return;
+  }
+
+  let html = `
+<b>Konfirmasi Patungan</b><br><br>
+Paket: <b>Patungan 50 Voucher</b><br>
+Harga: <b>${rp(HARGA)} / voucher</b><br>
+Total Paket: <b>${rp(HARGA * TOTAL)}</b><br><br>
+<b>Rincian Peserta:</b><br>
+1. ${wa1} — ${q1} voucher (${rp(q1 * HARGA)})<br>
+2. ${wa2} — ${q2} voucher (${rp(q2 * HARGA)})<br>
+`;
+
+  if(wa3 && q3 > 0){
+    html += `3. ${wa3} — ${q3} voucher (${rp(q3 * HARGA)})<br>`;
+  }
+
+  document.getElementById('ringkasan').innerHTML = html;
+  document.getElementById('formBox').classList.add('hidden');
+  document.getElementById('confirmBox').classList.remove('hidden');
+}
+
+function ubah(){
+  document.getElementById('confirmBox').classList.add('hidden');
+  document.getElementById('formBox').classList.remove('hidden');
+}
+
+function kirimWA(){
+  const wa1 = document.getElementById('wa1').value;
+  const wa2 = document.getElementById('wa2').value;
+  const wa3 = document.getElementById('wa3').value;
+
+  const q1 = document.getElementById('qty1').value || 0;
+  const q2 = document.getElementById('qty2').value || 0;
+  const q3 = document.getElementById('qty3').value || 0;
+
+  let msg =
+`Halo CS VoucherQita,
+Saya ingin patungan voucher.
+
+Paket: Patungan 50
+Harga: ${rp(HARGA)} / voucher
+Total Paket: ${rp(HARGA * TOTAL)}
+
+Rincian Peserta:
+
+1. ${wa1}
+   Jumlah: ${q1} voucher
+
+2. ${wa2}
+   Jumlah: ${q2} voucher
+`;
+
+  if(wa3 && q3 > 0){
+    msg += `
+3. ${wa3}
+   Jumlah: ${q3} voucher
+`;
+  }
+
+  window.open(
+    'https://wa.me/62895404663520?text=' + encodeURIComponent(msg),
+    '_blank'
+  );
+}
+</script>
+
+</body>
+</html>

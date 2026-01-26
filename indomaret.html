@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lacak Stok Indomaret</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#0054A6;
+  --bg:#f5f5f7;
+  --card:#ffffff;
+  --muted:#666;
+  --shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Poppins,sans-serif;
+  background:var(--bg);
+  color:#111;
+}
+header{
+  background:var(--primary);
+  color:#fff;
+  padding:16px;
+  text-align:center;
+  font-weight:700;
+  position:sticky;
+  top:0;
+}
+.back{
+  position:absolute;
+  left:16px;
+  top:16px;
+  cursor:pointer;
+}
+.container{
+  max-width:720px;
+  margin:auto;
+  padding:16px;
+}
+.card{
+  background:var(--card);
+  border-radius:14px;
+  padding:18px;
+  box-shadow:var(--shadow);
+  margin-bottom:16px;
+}
+.card h2{
+  margin-top:0;
+  font-size:18px;
+}
+.step{
+  font-size:14px;
+  margin-bottom:10px;
+}
+.image-box{
+  margin:10px 0 18px;
+  text-align:center;
+}
+.image-box img{
+  max-width:100%;
+  border-radius:12px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.12);
+}
+.caption{
+  font-size:12px;
+  color:#555;
+  margin-top:6px;
+}
+.btn-wa{
+  display:block;
+  width:100%;
+  padding:14px;
+  border-radius:10px;
+  background:#128C7E;
+  color:#fff;
+  text-align:center;
+  text-decoration:none;
+  font-weight:600;
+  margin-top:18px;
+}
+.note{
+  font-size:12px;
+  color:#666;
+  margin-top:16px;
+  text-align:center;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <span class="back" onclick="history.back()">⬅️</span>
+  Lacak Stok Indomaret
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>Langkah Mengecek Stok Indomaret</h2>
+
+    <div class="step"><b>1.</b> Download dan buka aplikasi <b>Klik Indomaret</b></div>
+    <div class="step"><b>2.</b> Pilih menu <b>Indomaret</b></div>
+    <div class="step"><b>3.</b> Pada bagian <b>Dikirim ke</b>, klik dan pilih lokasi</div>
+
+    <div class="step"><b>4.</b> Pilih <b>Ambil di Toko</b></div>
+    <div class="image-box">
+      <img src="indomaret-dikirim-ke.jpg" alt="Menu Dikirim ke Klik Indomaret">
+      <div class="caption">
+        Contoh menu <b>Dikirim ke</b> dan pilihan <b>Ambil di Toko</b>
+      </div>
+    </div>
+
+    <div class="step"><b>5.</b> Akan muncul <b>daftar toko Indomaret terdekat</b></div>
+    <div class="image-box">
+      <img src="indomaret-daftar-toko.jpg" alt="Daftar Toko Indomaret">
+      <div class="caption">
+        Contoh daftar toko Indomaret beserta <b>kode toko</b>
+      </div>
+    </div>
+
+    <div class="step"><b>6.</b> Salin <b>kode toko</b> (contoh: F210, T25J)</div>
+    <div class="step"><b>7.</b> Kirim kode toko ke <b>WhatsApp kami</b></div>
+
+    <div style="font-size:12px;color:#555;margin-top:8px">
+      *Anda dapat mengirim lebih dari satu kode toko sekaligus
+    </div>
+
+    <a class="btn-wa"
+       href="https://wa.me/62895404663519?text=Halo,%20saya%20ingin%20cek%20stok%20Indomaret.%0A%0AKode%20toko:%0A"
+       target="_blank">
+      Kirim Kode Toko via WhatsApp
+    </a>
+
+    <div class="note">
+      ℹ️ Pengecekan stok bersifat manual berdasarkan kode toko dan dapat berbeda
+      dengan kondisi aktual di toko.
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

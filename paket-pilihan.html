@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paket Voucher Pilihan</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#5b2c98;
+  --bg:#f5f5f7;
+  --card:#ffffff;
+  --muted:#666;
+  --shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Poppins,sans-serif;
+  background:var(--bg);
+  color:#111;
+}
+header{
+  background:var(--primary);
+  color:#fff;
+  padding:16px;
+  text-align:center;
+  position:sticky;
+  top:0;
+}
+header .back{
+  position:absolute;
+  left:16px;
+  top:16px;
+  cursor:pointer;
+}
+.container{
+  max-width:640px;
+  margin:auto;
+  padding:16px;
+}
+.card{
+  background:var(--card);
+  border-radius:16px;
+  padding:22px;
+  box-shadow:var(--shadow);
+  margin-bottom:16px;
+}
+.card h2{
+  margin:0 0 6px;
+  font-size:18px;
+}
+.card p{
+  margin:0 0 14px;
+  font-size:13px;
+  color:var(--muted);
+}
+.card a{
+  display:block;
+  text-align:center;
+  padding:14px;
+  border-radius:12px;
+  font-weight:700;
+  text-decoration:none;
+  color:#fff;
+}
+.btn50{background:#5b2c98}
+.btn75{background:#4a227d}
+.btn100{background:#38195f}
+.btn-patungan{background:#5b2c98} /* DISAMAIN */
+.note{
+  font-size:12px;
+  color:#666;
+  text-align:center;
+  margin-top:12px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <span class="back" onclick="history.back()">⬅️</span>
+  Paket Voucher Pilihan
+</header>
+
+<div class="container">
+
+  <!-- PAKET 50 -->
+  <div class="card">
+    <h2>Paket 50 Voucher</h2>
+    <p>
+      Denom 100.000 • Harga 87.000 / voucher<br>
+      Total bayar Rp 4.350.000
+    </p>
+    <a href="paket-50.html" class="btn50">
+      Pilih Paket 50
+    </a>
+  </div>
+
+  <!-- PAKET 75 -->
+  <div class="card">
+    <h2>Paket 75 Voucher</h2>
+    <p>
+      Denom 100.000 • Harga 86.000 / voucher<br>
+      Total bayar Rp 6.450.000
+    </p>
+    <a href="paket-75.html" class="btn75">
+      Pilih Paket 75
+    </a>
+  </div>
+
+  <!-- PAKET 100 -->
+  <div class="card">
+    <h2>Paket 100 Voucher</h2>
+    <p>
+      Denom 100.000 • Harga 85.000 / voucher<br>
+      Total bayar Rp 8.500.000
+    </p>
+    <a href="paket-100.html" class="btn100">
+      Pilih Paket 100
+    </a>
+  </div>
+
+  <!-- FITUR PATUNGAN -->
+  <div class="card">
+    <h2>Fitur Patungan</h2>
+    <p>
+      Pembelian paket voucher secara patungan.
+      Setiap orang dapat mengambil sebagian voucher sesuai kebutuhan.
+    </p>
+    <a href="patungan.html" class="btn-patungan">
+      Masuk Fitur Patungan
+    </a>
+  </div>
+
+  <div class="note">
+    Silakan pilih paket sesuai kebutuhan.<br>
+    Komposisi voucher dapat diatur di langkah berikutnya.
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>VoucherKita - Keranjang (Enhanced)</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#5b2c98; --bg:#f5f5f7; --card:#fff; --muted:#9aa0a6; --success:#128C7E;
+  --shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);font-family:"Poppins",sans-serif;color:#111;}
+
+header{padding:16px;background:var(--primary);color:#fff;font-weight:800;font-size:20px;text-align:center;position:sticky;top:0;z-index:50}
+.back-btn{position:absolute;left:16px;top:16px;cursor:pointer;font-size:16px;display:none}
+
+.warning{display:flex;gap:10px;align-items:flex-start;background:#fff8e1;border:1px solid #ffe0b2;color:#8a6d3b;padding:12px 14px;border-radius:10px;margin:16px;font-size:13px;line-height:1.5;}
+.warning b{display:block;margin-bottom:2px;}
+
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:16px;padding:16px}
+.product-card{background:var(--card);border-radius:10px;padding:12px;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.product-card .name{font-weight:700;margin-bottom:6px;text-align:center}
+.product-card .old{font-size:12px;text-decoration:line-through;color:var(--muted)}
+.product-card .new{font-weight:700;margin-bottom:8px}
+.product-card button{background:var(--primary);color:#fff;border:none;padding:8px;border-radius:8px;cursor:pointer;width:100%;}
+
+.cart-page{display:none;padding:16px}
+.cart-item{display:flex;justify-content:space-between;align-items:center;background:var(--card);padding:12px;border-radius:10px;box-shadow:var(--shadow);margin-bottom:12px;color:inherit}
+.cart-item .info{flex:1;margin-right:12px}
+.cart-item b{display:block}
+.small{color:var(--muted);font-size:13px;margin-top:6px}
+.qty-controls{display:flex;align-items:center;gap:6px;margin-top:8px}
+.qty-controls button{width:34px;height:34px;border-radius:6px;border:1px solid #ddd;background:#fff;cursor:pointer;font-size:18px}
+.qty-controls input{width:56px;padding:6px;border:1px solid #eee;border-radius:6px;text-align:center}
+
+.total-section{margin-top:12px;padding:14px;background:var(--card);border-radius:10px;box-shadow:var(--shadow);text-align:right;font-weight:800}
+.checkout-btn{width:100%;margin-top:10px;padding:12px;border-radius:8px;background:var(--success);color:#fff;border:none;font-weight:700;cursor:pointer}
+
+.floating-cart{position:fixed;right:20px;bottom:20px;width:56px;height:56px;border-radius:50%;background:#fff;display:none;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(0,0,0,0.15);z-index:60;cursor:pointer}
+.badge{position:absolute;top:-6px;right:-6px;background:#e63946;color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;transform-origin:center;transition:transform .18s cubic-bezier(.2,.9,.3,1)}
+
+.toast-wrap{position:fixed;left:50%;transform:translateX(-50%);bottom:90px;z-index:80;display:flex;flex-direction:column;gap:8px}
+.toast{background:#111;color:#fff;padding:10px 14px;border-radius:8px;opacity:.95;animation:slideUp 0.3s ease-out}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 0.95; }
+}
+
+.footer{padding:16px;text-align:center;color:var(--muted);font-size:12px}
+
+.product-card.indomaret{background:#0052A5;color:#fff}
+.product-card.alfamart{background:#FF0000;color:#fff}
+
+.product-card button:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s;
+}
+
+/* ==================== PAYMENT METHOD STYLING ==================== */
+.payment-section{
+  margin-top:18px;
+  padding:18px;
+  background:#fff;
+  border-radius:14px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+.pay-header{
+  font-weight:700;
+  font-size:17px;
+  margin-bottom:6px;
+}
+.pay-sub{
+  font-size:13px;
+  color:#777;
+  margin-bottom:16px;
+}
+.pay-list{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.pay-option{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:#f6f6f6;
+  padding:14px;
+  border-radius:12px;
+  border:1px solid #e3e3e3;
+  opacity:0.6;
+  cursor:not-allowed;
+}
+.pay-text{font-weight:600;font-size:14px;}
+.pay-status{font-size:12px;color:#b00;font-weight:700;}
+.pay-icon{
+  width:26px;height:26px;border-radius:6px;background:#ccc;margin-right:12px;
+}
+.bank{background:#9aa0a6;}
+.va{background:#8b8f92;}
+.qris{background:#717577;}
+.indo{background:#5d6d7e;}
+.alfa{background:#6e6e6e;}
+
+/* ========== Brand styling in cart ========== */
+.cart-item.indo {
+  background: linear-gradient(135deg,#0054A6,#0A74DA);
+  color: #fff;
+}
+.cart-item.indo .small { color: rgba(255,255,255,0.9); }
+.cart-item.indo .qty-controls button{ border-color: rgba(255,255,255,0.14); background: rgba(255,255,255,0.08); color:#fff; }
+.cart-item.indo .qty-controls input{ background: rgba(255,255,255,0.08); color:#fff; border-color: rgba(255,255,255,0.14); }
+.cart-item.indo button { background: transparent; color:#fff; border:1px solid rgba(255,255,255,0.14); }
+
+.cart-item.alfa {
+  background: linear-gradient(135deg,#E12828,#FF5757);
+  color: #fff;
+}
+.cart-item.alfa .small { color: rgba(255,255,255,0.9); }
+.cart-item.alfa .qty-controls button{ border-color: rgba(255,255,255,0.14); background: rgba(255,255,255,0.08); color:#fff; }
+.cart-item.alfa .qty-controls input{ background: rgba(255,255,255,0.08); color:#fff; border-color: rgba(255,255,255,0.14); }
+.cart-item.alfa button { background: transparent; color:#fff; border:1px solid rgba(255,255,255,0.14); }
+
+.cart-item .qty-controls button:hover { transform:scale(1.02); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="back-btn" onclick="goBack()">⬅️</div>
+  <div style="font-size:20px;font-weight:800;">VoucherQita</div>
+  <div style="font-size:12px;opacity:0.9;">
+    Voucher Digital Indomaret & Alfamart
+  </div>
+</header>
+
+<section id="brandView">
+
+  <div class="warning" id="paymentWarning">
+    <b>Pembayaran Online Sementara Tidak Tersedia</b><br>
+    Sistem pembayaran otomatis kami sedang dalam proses perbaikan.
+    <br>Anda tetap dapat melakukan pemesanan voucher melalui Customer Service resmi VoucherQita.
+  </div>
+
+  <div style="padding:0 16px 8px;">
+    <div style="font-weight:800;font-size:20px;text-align:center;margin-bottom:6px">
+      VoucherQita
+    </div>
+    <div style="color:#555;text-align:center;margin-bottom:12px;font-size:14px">
+      Platform Voucher Digital Indomaret & Alfamart
+    </div>
+  </div>
+
+  <div style="padding:0 16px 16px;display:flex;flex-direction:column;gap:12px">
+    <div class="product-card indomaret"
+         style="height:84px;justify-content:center;cursor:pointer"
+         onclick="openBrand('Indomaret')">
+      Voucher Indomaret Digital
+    </div>
+
+    <div class="product-card alfamart"
+         style="height:84px;justify-content:center;cursor:pointer"
+         onclick="openBrand('Alfamart')">
+      Voucher Alfamart Digital
+    </div>
+  </div>
+
+  <div style="padding:16px; text-align:center; margin-top:16px;">
+    <a href="https://wa.me/62895404663520"
+       style="background:#128C7E;color:#fff;padding:16px 18px;border-radius:12px;
+              font-weight:700;letter-spacing:0.3px;display:inline-block;width:100%;max-width:280px;
+              text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+      Pesan Voucher via WhatsApp
+    </a>
+    <div style="margin-top:8px;font-size:12px;color:#666">
+      Customer Service aktif setiap hari • Respon cepat
+    </div>
+  </div>
+
+  <div style="padding:16px; text-align:center; margin-top:8px;">
+    <a href="faq.html"
+       style="display:inline-block;padding:10px 16px;border-radius:8px;
+              border:2px dashed #5b2c98;color:#5b2c98;font-weight:700;
+              text-decoration:none;width:100%;max-width:260px;">
+      FAQ & Panduan Pemesanan
+    </a>
+  </div>
+
+</section>
+
+<section id="productsView" style="display:none;">
+  <div class="product-grid" id="productGrid"></div>
+  
+</section>
+
+<section id="cartView" class="cart-page">
+  <div style="font-weight:700;font-size:18px;margin-bottom:6px">Keranjang Saya</div>
+  <div style="color:#555;margin-bottom:12px">
+  Pastikan voucher dan jumlah sudah sesuai sebelum melanjutkan ke WhatsApp
+</div>
+
+  <div id="cartItems"></div>
+  <div class="total-section" id="cartTotal">Total: Rp 0</div>
+
+  <div class="payment-section">
+    <div class="pay-header">Metode Pembayaran</div>
+    <div class="pay-sub">
+  Pembayaran otomatis sedang dalam perbaikan.<br>
+  Pemesanan tetap dapat diproses melalui WhatsApp Customer Service.
+</div>
+
+    <div class="pay-list">
+      <label class="pay-option disabled">
+        <div class="pay-icon bank"></div>
+        <div class="pay-text">Transfer Bank</div>
+        <div class="pay-status">Gangguan</div>
+      </label>
+      <label class="pay-option disabled">
+        <div class="pay-icon va"></div>
+        <div class="pay-text">Virtual Account</div>
+        <div class="pay-status">Gangguan</div>
+      </label>
+      <label class="pay-option disabled">
+        <div class="pay-icon qris"></div>
+        <div class="pay-text">QRIS</div>
+        <div class="pay-status">Gangguan</div>
+      </label>
+      <label class="pay-option disabled">
+        <div class="pay-icon indo"></div>
+        <div class="pay-text">Indomaret</div>
+        <div class="pay-status">Gangguan</div>
+      </label>
+      <label class="pay-option disabled">
+        <div class="pay-icon alfa"></div>
+        <div class="pay-text">Alfamart</div>
+        <div class="pay-status">Gangguan</div>
+      </label>
+    </div>
+  </div>
+
+  <button class="checkout-btn" onclick="checkout()">Lanjutkan Pemesanan via WhatsApp</button>
+  <div style="margin-top:10px;text-align:center;font-size:12px;color:#666">
+  Customer Service aktif setiap hari<br>
+  ⏰ 08.00 – 22.00 WIB
+</div>
+</section>
+
+<div class="floating-cart" id="floatingCart" onclick="openCart()">
+  <div class="badge" id="cartBadge" style="display:none">0</div>
+</div>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<div class="footer">
+  VoucherQita © 2025<br>
+  Platform Voucher Digital Indomaret & Alfamart
+</div>
+
+
+<script>
+// ========================= VIEW / SPA STATE =========================
+function setView(view, brand = '') {
+  brandView.style.display = 'none';
+  productsView.style.display = 'none';
+  cartView.style.display = 'none';
+
+  document.querySelector('.back-btn').style.display =
+    view === 'brand' ? 'none' : 'block';
+
+  floatingCart.style.display =
+    view === 'products' ? 'flex' : 'none';
+
+  if (view === 'brand') {
+    brandView.style.display = 'block';
+  }
+
+  if (view === 'products') {
+    productsView.style.display = 'block';
+    if (brand) currentBrand = brand;
+    renderProducts();
+  }
+
+  if (view === 'cart') {
+    cartView.style.display = 'block';
+    renderCart();
+  }
+}
+
+// ========================= HISTORY NAV =========================
+function openBrand(brand) {
+  history.pushState({ view: 'products', brand }, '', '#products');
+  setView('products', brand);
+}
+
+function openCart() {
+  history.pushState({ view: 'cart' }, '', '#cart');
+  setView('cart');
+}
+
+function goBack() {
+  history.back();
+}
+
+window.onpopstate = function (e) {
+  if (!e.state) {
+    setView('brand');
+    return;
+  }
+
+  if (e.state.view === 'products') {
+    setView('products', e.state.brand);
+  }
+
+  if (e.state.view === 'cart') {
+    setView('cart');
+  }
+};
+
+// ========================= DATA & STATE =========================
+const PRICE_PROMO = { 25000: 22500, 50000: 44000, 100000: 88000 };
+const PRICE_OLD   = { 25000: 26500, 50000: 51500, 100000: 101500 };
+const DISABLED_NOMINALS = [25000, 50000];
+const STORAGE_KEY = 'vk_cart_v1';
+
+let cart = loadCart();
+let currentBrand = '';
+
+const $ = id => document.getElementById(id);
+const formatRp = n => 'Rp ' + n.toLocaleString('id-ID');
+
+// ========================= TOAST =========================
+function toast(msg, timeout = 3000) {
+  const wrap = $('toastWrap');
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = msg;
+  wrap.appendChild(t);
+
+  setTimeout(() => {
+    t.style.opacity = '0';
+    setTimeout(() => wrap.removeChild(t), 300);
+  }, timeout);
+}
+
+// ========================= STORAGE =========================
+function saveCart() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+}
+
+function loadCart() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  } catch {
+    return [];
+  }
+}
+
+// ========================= PRODUCTS =========================
+function renderProducts() {
+  const grid = $('productGrid');
+  grid.innerHTML = '';
+
+  [25000, 50000, 100000].forEach(n => {
+    const promo = PRICE_PROMO[n];
+    const old   = PRICE_OLD[n];
+    const item  = cart.find(i => i.brand === currentBrand && i.nominal === n);
+    const qty   = item ? item.qty : 0;
+    const isDisabled = DISABLED_NOMINALS.includes(n);
+
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    if (isDisabled) {
+      card.style.opacity = '0.45';
+      card.style.pointerEvents = 'none';
+    }
+
+    card.innerHTML = `
+      <div class="name">${currentBrand} ${n.toLocaleString()}</div>
+      <div class="old">${formatRp(old)}</div>
+      <div class="new">${formatRp(promo)}</div>
+      ${isDisabled ? '<div style="font-size:12px;color:#666">Stok kosong</div>' : ''}
+    `;
+
+    if (isDisabled) {
+  const sold = document.createElement('div');
+  sold.textContent = 'Stok Kosong';
+  sold.style.fontSize = '13px';
+  sold.style.fontWeight = '700';
+  sold.style.color = '#666';
+  sold.style.marginTop = '8px';
+
+  card.appendChild(sold);
+} else {
+  const btn = document.createElement('button');
+  btn.textContent = 'Tambah';
+  btn.style.display = qty ? 'none' : 'block';
+  btn.onclick = () => addThenShowQty(n);
+
+  const qc = document.createElement('div');
+  qc.className = 'qty-controls';
+  qc.style.display = qty ? 'flex' : 'none';
+  qc.innerHTML = `
+    <button onclick="changeQty('${currentBrand}',${n},-1)">−</button>
+    <input type="number" value="${qty}" readonly>
+    <button onclick="changeQty('${currentBrand}',${n},1)">+</button>
+  `;
+
+  card.appendChild(btn);
+  card.appendChild(qc);
+}
+
+grid.appendChild(card);
+  });
+}
+
+// ========================= CART =========================
+function addThenShowQty(n) {
+  let it = cart.find(i => i.brand === currentBrand && i.nominal === n);
+  if (!it) cart.push({ brand: currentBrand, nominal: n, qty: 1, price: PRICE_PROMO[n] });
+  else it.qty++;
+
+  saveCart();
+  updateCartBadge();
+  toast('Ditambahkan ke keranjang');
+  renderProducts();
+}
+
+// 🔥 FIX UTAMA
+function changeQty(brand, n, d) {
+  let it = cart.find(i => i.brand === brand && i.nominal === n);
+  if (!it) return;
+
+  it.qty += d;
+  if (it.qty <= 0) cart = cart.filter(i => i !== it);
+
+  saveCart();
+  updateCartBadge();
+  renderProducts();
+  if (cartView.style.display === 'block') renderCart();
+}
+
+function updateCartBadge() {
+  const total = cart.reduce((s, i) => s + i.qty, 0);
+  const b = $('cartBadge');
+  b.style.display = total ? 'flex' : 'none';
+  b.textContent = total;
+}
+
+function renderCart(){
+  const wrap = $('cartItems');
+  wrap.innerHTML = '';
+
+  if(cart.length === 0){
+    wrap.innerHTML =
+      '<div style="text-align:center;color:#666;padding:18px">Keranjang kosong</div>';
+    $('cartTotal').innerText = 'Total: Rp 0';
+    return;
+  }
+
+  let total = 0;
+
+  cart.forEach(it=>{
+    total += it.qty * it.price;
+
+    const brandClass =
+      it.brand.toLowerCase().includes('indo') ? 'indo' :
+      it.brand.toLowerCase().includes('alfa') ? 'alfa' : '';
+
+    const div = document.createElement('div');
+    div.className = 'cart-item ' + brandClass;
+
+    div.innerHTML = `
+      <div class="info">
+        <b>${it.brand} ${it.nominal.toLocaleString()}</b>
+        <div class="small">${formatRp(it.price)} × ${it.qty}</div>
+        <div class="qty-controls">
+          <button onclick="changeQty('${it.brand}',${it.nominal},-1)">−</button>
+          <input type="number" value="${it.qty}" readonly>
+          <button onclick="changeQty('${it.brand}',${it.nominal},1)">+</button>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-weight:700">${formatRp(it.qty * it.price)}</div>
+        <button onclick="removeItem('${it.brand}',${it.nominal})">🗑️</button>
+      </div>
+    `;
+
+    wrap.appendChild(div);
+  });
+
+  $('cartTotal').innerText = 'Total: ' + formatRp(total);
+}
+
+// ========================= CHECKOUT =========================
+function checkout() {
+  if (!cart.length) {
+    toast('Keranjang kosong');
+    return;
+  }
+
+  let txt = 'Halo, saya ingin memesan voucher:\n';
+  cart.forEach(i => {
+    txt += `- ${i.brand} ${i.nominal.toLocaleString()} x${i.qty} = ${formatRp(i.qty*i.price)}\n`;
+  });
+  txt += `Total: ${formatRp(cart.reduce((s,i)=>s+i.qty*i.price,0))}`;
+
+  window.open(
+    'https://wa.me/62895404663520?text=' + encodeURIComponent(txt),
+    '_blank'
+  );
+}
+
+updateCartBadge();
+</script>
