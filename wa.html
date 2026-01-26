@@ -3,9 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <title>Redirect WhatsApp</title>
-  <meta http-equiv="refresh" content="0; url=https://wa.me/6281247978891">
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const text = params.get("text");
+
+    const waNumber = "6281247978891"; // WA BARU
+
+    const pesan = text
+      ? text
+      : "Halo CS VoucherQita, saya ingin order voucher.";
+
+    window.location.href =
+      "https://wa.me/" + waNumber + "?text=" + encodeURIComponent(pesan);
+  </script>
 </head>
-<body>
-  <p>Mengarahkan ke WhatsApp...</p>
-</body>
+<body></body>
 </html>
