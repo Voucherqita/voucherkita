@@ -1,116 +1,203 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VoucherQita - Maintenance</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VoucherQita</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
+:root{
+  --primary:#5b2c98;
+  --bg:#f5f5f7;
+  --card:#ffffff;
+  --muted:#666;
+  --shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+*{box-sizing:border-box}
 body{
-    margin:0;
-    font-family:'Poppins',sans-serif;
-    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    height:100vh;
-    text-align:center;
+  margin:0;
+  font-family:Poppins,sans-serif;
+  background:var(--bg);
+  color:#111;
 }
-
+header{
+  background:var(--primary);
+  color:#fff;
+  padding:20px 16px;
+  text-align:center;
+}
+header h1{
+  margin:0;
+  font-size:22px;
+  font-weight:700;
+}
+header p{
+  margin:6px 0 0;
+  font-size:13px;
+  opacity:.9;
+}
 .container{
-    background:rgba(255,255,255,0.08);
-    padding:40px;
-    border-radius:20px;
-    backdrop-filter:blur(10px);
-    box-shadow:0 15px 40px rgba(0,0,0,0.4);
-    max-width:500px;
-    width:90%;
+  max-width:640px;
+  margin:auto;
+  padding:16px;
 }
-
-h1{
-    font-size:28px;
-    margin-bottom:10px;
+.warning{
+  background:#fff8e1;
+  border:1px solid #ffe0b2;
+  color:#8a6d3b;
+  padding:14px;
+  border-radius:12px;
+  font-size:13px;
+  line-height:1.5;
+  margin-bottom:18px;
 }
-
-p{
-    font-size:14px;
-    opacity:0.9;
+.card{
+  background:var(--card);
+  border-radius:16px;
+  padding:22px;
+  box-shadow:var(--shadow);
+  margin-bottom:18px;
+  text-align:center;
 }
-
-.timer{
-    font-size:36px;
-    font-weight:700;
-    margin:25px 0;
+.card h2{
+  margin:0 0 8px;
+  font-size:18px;
 }
-
-.note{
-    font-size:13px;
-    margin-top:10px;
-    opacity:0.8;
+.card p{
+  margin:0 0 18px;
+  font-size:13px;
+  color:var(--muted);
 }
-
-.brand{
-    margin-top:20px;
-    font-weight:600;
-    font-size:14px;
-    opacity:0.9;
+.card a{
+  display:block;
+  padding:14px;
+  border-radius:12px;
+  text-decoration:none;
+  font-weight:700;
+  color:#fff;
+}
+.btn-voucher{
+  background:#5b2c98;
+}
+.btn-tools{
+  background:#333;
+}
+.footer{
+  text-align:center;
+  font-size:12px;
+  color:#777;
+  padding:20px 10px;
+}
+.footer a{
+  color:#5b2c98;
+  text-decoration:none;
+  font-weight:600;
 }
 </style>
 </head>
 
 <body>
 
+<header>
+  <h1>VoucherQita</h1>
+  <p>Voucher Digital & Alat Bantu Stok Toko</p>
+</header>
+
 <div class="container">
-    <h1>Website Sedang Maintenance</h1>
-    <p>Kami sedang melakukan pembaruan sistem sementara.</p>
 
-    <div class="timer" id="countdown">Loading...</div>
+  <!-- WARNING -->
+  <div class="warning">
+    <b>Pembayaran Online Sementara Tidak Tersedia</b><br>
+    Sistem pembayaran otomatis sedang dalam perbaikan.
+    Pemesanan voucher tetap dapat dilakukan melalui Customer Service resmi VoucherQita.
+  </div>
 
-    <p class="note">
-        Website akan kembali aktif pukul <strong>10.00 WIB</strong>.
-        Mohon tidak melakukan transaksi sementara waktu.
+  <!-- VOUCHER -->
+  <div class="card">
+    <h2>Voucher Belanja Elektrik</h2>
+    <p>
+      Beli voucher digital Indomaret & Alfamart dengan proses cepat
+      melalui WhatsApp Customer Service.
     </p>
-
-    <div class="brand">
-        — Team VoucherQita —
-    </div>
+    <a href="voucher.html" class="btn-voucher">
+      Masuk ke Voucher
+    </a>
+  </div>
+  <!-- PAKET VOUCHER -->
+<div class="card">
+  <h2>Paket Voucher</h2>
+  <p>
+    Pilihan paket voucher dengan harga lebih hemat.
+    Cocok untuk pembelian banyak dan reseller.
+  </p>
+  <a href="paket-pilihan.html" class="btn-voucher">
+    Lihat Paket Voucher
+  </a>
 </div>
 
-<script>
-// SET TARGET JAM 10 WIB
-let now = new Date();
-let target = new Date();
+<!-- ALAT BANTU -->
+  <div class="card">
+    <h2>Alat Bantu</h2>
+    <p>
+      Fitur pendukung untuk cek stok toko dan pengolahan data
+      berbasis kebutuhan lapangan.
+    </p>
+    <a href="alat-bantu.html" class="btn-tools">
+      Buka Alat Bantu
+    </a>
+  </div>
 
-target.setHours(10);
-target.setMinutes(0);
-target.setSeconds(0);
+  <!-- TRUST / KEPERCAYAAN -->
+  <div class="card">
+    <h2>Kenapa VoucherQita?</h2>
+    <p style="text-align:left;line-height:1.7">
+      ✔️ Proses pemesanan cepat & transparan<br>
+      ✔️ Customer Service aktif setiap hari<br>
+      ✔️ Digunakan oleh reseller & pembelian banyak<br>
+      ✔️ Sistem terus dikembangkan & diperbarui
+    </p>
+    <div style="font-size:12px;color:#666;margin-top:10px">
+      Jika mengalami kendala, silakan hubungi
+<a href="wa.html"
+   style="color:#128C7E;font-weight:600;text-decoration:none">
+  Customer Service
+</a>.
+    </div>
+  </div>
 
-// kalau sudah lewat jam 10 hari ini, set ke besok
-if(now > target){
-    target.setDate(target.getDate() + 1);
-}
+</div>
 
-let countdown = document.getElementById("countdown");
+<div class="footer">
+<!-- PANDUAN -->
+<div class="card">
+  <h2>Butuh Panduan?</h2>
+  <p>
+    Pelajari cara pemesanan dan jawaban atas pertanyaan
+    yang sering diajukan sebelum melakukan order.
+  </p>
 
-let x = setInterval(function(){
-    let now = new Date().getTime();
-    let distance = target - now;
+  <a href="Cara-order.html"
+     class="btn-voucher"
+     style="margin-bottom:12px;color:#fff">
+    Cara Order
+  </a>
 
-    let hours = Math.floor((distance % (1000*60*60*24))/(1000*60*60));
-    let minutes = Math.floor((distance % (1000*60*60))/(1000*60));
-    let seconds = Math.floor((distance % (1000*60))/1000);
+  <a href="Faq.html"
+     class="btn-tools"
+     style="color:#fff">
+    FAQ
+  </a>
+  </div>
 
-    countdown.innerHTML = hours + "j " + minutes + "m " + seconds + "d";
+</div>
 
-    if(distance < 0){
-        clearInterval(x);
-        countdown.innerHTML = "Website Sedang Dipersiapkan...";
-    }
-},1000);
-</script>
+<div class="footer">
+  <div>
+    VoucherQita © 2025
+  </div>
+</div>
 
 </body>
 </html>
