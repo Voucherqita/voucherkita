@@ -522,12 +522,15 @@ function checkout() {
     }
   }
 
-  let txt = 'Halo, saya ingin memesan voucher:\n';
+// BUAT ORDER ID
+let orderId = "VQ-" + Math.floor(1000 + Math.random() * 9000);
 
-  cart.forEach(i => {
-    txt += `- ${i.brand} ${i.nominal.toLocaleString()} x${i.qty}\n`;
-  });
+let txt = 'ORDER ID : ' + orderId + '\n\n';
+txt += 'Halo, saya ingin memesan voucher:\n';
 
+cart.forEach(i => {
+  txt += `- ${i.brand} ${i.nominal.toLocaleString()} x${i.qty} = ${formatRp(i.qty*i.price)}\n`;
+});
   // SIMPAN ORDER DEVICE
   localStorage.setItem("vk_last_order", today);
 
