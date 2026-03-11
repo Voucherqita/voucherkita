@@ -331,10 +331,20 @@ const $ = id => document.getElementById(id);
 const formatRp = n => 'Rp ' + n.toLocaleString('id-ID');
 
 // ========================= TOAST =========================
-function toast(msg, timeout = 3000) {
+function toast(msg, type = "info", timeout = 3000) {
   const wrap = $('toastWrap');
   const t = document.createElement('div');
   t.className = 'toast';
+
+  // warna notifikasi
+  if(type === "error"){
+    t.style.background = "#e63946";
+  }
+
+  if(type === "success"){
+    t.style.background = "#2a9d8f";
+  }
+
   t.textContent = msg;
   wrap.appendChild(t);
 
@@ -343,20 +353,6 @@ function toast(msg, timeout = 3000) {
     setTimeout(() => wrap.removeChild(t), 300);
   }, timeout);
 }
-
-// ========================= STORAGE =========================
-function saveCart() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
-}
-
-function loadCart() {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-  } catch {
-    return [];
-  }
-}
-
 // ========================= PRODUCTS =========================
 function renderProducts() {
   const grid = $('productGrid');
@@ -496,49 +492,54 @@ function renderCart(){
 // ========================= CHECKOUT =========================
 function checkout() {
 
-  // LIMIT DEVICE 1x PER HARI
-  let today = new Date().toDateString();
-  let lastOrder = localStorage.getItem("vk_last_order");
-
-  if(lastOrder === today){
-    alert("Perangkat ini sudah melakukan pemesanan hari ini.");
-    return;
-  }
-
   if (!cart.length) {
     toast('Keranjang kosong');
     return;
   }
 
   let totalQty = cart.reduce((s,i)=>s+i.qty,0);
+  let isMember = false;
 
   // PASSWORD MEMBER
   if(totalQty > 1){
     let pass = prompt("Masukkan password member");
 
-    if(pass !== "VK2026"){
-      alert("Password salah. Pembelian lebih dari 1 hanya untuk member.");
+    if(pass === "VK2026"){
+      isMember = true;
+    }else{
+      toast("Password salah. Pembelian lebih dari 1 hanya untuk member.");
       return;
     }
   }
 
-// BUAT ORDER ID
-let orderId = "VQ-" + Math.floor(1000 + Math.random() * 9000);
+  // LIMIT DEVICE (hanya untuk non member)
+  let today = new Date().toDateString();
+  let lastOrder = localStorage.getItem("vk_last_order");
 
-let txt = 'ORDER ID : ' + orderId + '\n\n';
-txt += 'Halo, saya ingin memesan voucher:\n';
+  if(!isMember && lastOrder === today){
+    toast("Perangkat ini sudah melakukan pemesanan hari ini.");
+    return;
+  }
 
-cart.forEach(i => {
-  txt += `- ${i.brand} ${i.nominal.toLocaleString()} x${i.qty} = ${formatRp(i.qty*i.price)}\n`;
-});
-  // SIMPAN ORDER DEVICE
-  localStorage.setItem("vk_last_order", today);
+  // BUAT ORDER ID
+  let orderId = "VQ-" + Math.floor(1000 + Math.random() * 9000);
+
+  let txt = 'ORDER ID : ' + orderId + '\n\n';
+  txt += 'Halo, saya ingin memesan voucher:\n';
+
+  cart.forEach(i => {
+    txt += `- ${i.brand} ${i.nominal.toLocaleString()} x${i.qty} = ${formatRp(i.qty*i.price)}\n`;
+  });
+
+  // SIMPAN LIMIT DEVICE (hanya non member)
+  if(!isMember){
+    localStorage.setItem("vk_last_order", today);
+  }
 
   window.open(
     'wa.html?text=' + encodeURIComponent(txt),
     '_blank'
   );
 }
-
 updateCartBadge();
 </script>
