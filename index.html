@@ -401,7 +401,7 @@ function prevSlide(){
 
 /* ===== COUNTDOWN ===== */
 
-// hitung waktu besok jam 00:00
+// hitung waktu lusa jam 00:00
 let now = new Date();
 
 let promoEnd = new Date(
@@ -411,34 +411,35 @@ let promoEnd = new Date(
   0,0,0
 ).getTime();
 
-let timer=setInterval(function(){
+let timer = setInterval(function(){
 
-let now=new Date().getTime();
+let nowTime = new Date().getTime();
 
-let distance=promoEnd-now;
+let distance = promoEnd - nowTime;
 
-let days = Math.floor(distance / (1000*60*60*24));
-
-let hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+// JAM TOTAL (bukan jam per hari)
+let hours = Math.floor(distance / (1000*60*60));
 
 let minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
 
 let seconds = Math.floor((distance % (1000*60)) / 1000);
 
-document.getElementById("countdown").innerHTML =
-days + " Hari " + hours + ":" + minutes + ":" + seconds;
+// supaya selalu 2 digit
+function pad(n){
+  return n.toString().padStart(2,'0');
+}
 
-if(distance<0){
+document.getElementById("countdown").innerHTML =
+pad(hours) + ":" + pad(minutes) + ":" + pad(seconds);
+
+if(distance < 0){
 
 clearInterval(timer);
 
-document.getElementById("countdown").innerHTML="PROMO SELESAI";
+document.getElementById("countdown").innerHTML = "PROMO SELESAI";
 
 }
 
 },1000);
-
-</script>
-
 </body>
 </html>
