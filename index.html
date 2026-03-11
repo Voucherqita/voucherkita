@@ -401,44 +401,36 @@ function prevSlide(){
 
 /* ===== COUNTDOWN ===== */
 
-// hitung waktu lusa jam 00:00
-let now = new Date();
+// target: lusa jam 00:00
+const now = new Date();
 
-let promoEnd = new Date(
+const promoEnd = new Date(
   now.getFullYear(),
   now.getMonth(),
   now.getDate() + 2,
-  0,0,0
+  0, 0, 0
 ).getTime();
 
-let timer = setInterval(function(){
+const timer = setInterval(function(){
 
-let nowTime = new Date().getTime();
+  const nowTime = Date.now();
+  let distance = promoEnd - nowTime;
 
-let distance = promoEnd - nowTime;
+  if(distance <= 0){
+    clearInterval(timer);
+    document.getElementById("countdown").innerHTML = "PROMO SELESAI";
+    return;
+  }
 
-// JAM TOTAL (bukan jam per hari)
-let hours = Math.floor(distance / (1000*60*60));
+  // total jam (bukan jam per hari)
+  const hours = Math.floor(distance / (1000*60*60));
+  const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+  const seconds = Math.floor((distance % (1000*60)) / 1000);
 
-let minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+  const pad = n => n.toString().padStart(2,'0');
 
-let seconds = Math.floor((distance % (1000*60)) / 1000);
-
-// supaya selalu 2 digit
-function pad(n){
-  return n.toString().padStart(2,'0');
-}
-
-document.getElementById("countdown").innerHTML =
-pad(hours) + ":" + pad(minutes) + ":" + pad(seconds);
-
-if(distance < 0){
-
-clearInterval(timer);
-
-document.getElementById("countdown").innerHTML = "PROMO SELESAI";
-
-}
+  document.getElementById("countdown").innerHTML =
+    pad(hours) + ":" + pad(minutes) + ":" + pad(seconds);
 
 },1000);
 </body>
