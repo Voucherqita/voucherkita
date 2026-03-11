@@ -549,10 +549,12 @@ function checkout() {
     localStorage.setItem("vk_last_order", today);
   }
 
-  window.open(
-    'wa.html?text=' + encodeURIComponent(txt),
-    '_blank'
-  );
-}
+ window.open(
+  'wa.html?text=' + encodeURIComponent(txt),
+  '_blank'
+);
+
+// ========================= INIT =========================
+setView('brand');
 updateCartBadge();
 </script>
