@@ -500,6 +500,19 @@ function checkout() {
     return;
   }
 
+  let totalQty = cart.reduce((s,i)=>s+i.qty,0);
+
+  if(totalQty > 1){
+    let pass = prompt("Masukkan password member");
+
+    if(pass !== "VK2026"){
+      alert("Password salah. Pembelian lebih dari 1 hanya untuk member.");
+      return;
+    }
+  }
+
+  let txt = 'Halo, saya ingin memesan voucher:\n';
+
   let txt = 'Halo, saya ingin memesan voucher:\n';
   cart.forEach(i => {
     txt += `- ${i.brand} ${i.nominal.toLocaleString()} x${i.qty} = ${formatRp(i.qty*i.price)}\n`;
