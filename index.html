@@ -417,12 +417,16 @@ let now=new Date().getTime();
 
 let distance=promoEnd-now;
 
-let hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
-let minutes=Math.floor((distance%(1000*60*60))/(1000*60));
-let seconds=Math.floor((distance%(1000*60))/1000);
+let days = Math.floor(distance / (1000*60*60*24));
 
-document.getElementById("countdown").innerHTML=
-hours+":"+minutes+":"+seconds;
+let hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+
+let minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+
+let seconds = Math.floor((distance % (1000*60)) / 1000);
+
+document.getElementById("countdown").innerHTML =
+days + " Hari " + hours + ":" + minutes + ":" + seconds;
 
 if(distance<0){
 
