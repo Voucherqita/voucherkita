@@ -95,6 +95,68 @@ header p{
   text-decoration:none;
   font-weight:600;
 }
+
+/* ===== SLIDER PROMO ===== */
+
+.promo-slider{
+margin-bottom:18px;
+overflow:hidden;
+border-radius:16px;
+box-shadow:var(--shadow);
+}
+
+.slides{
+display:flex;
+transition:transform 0.6s ease;
+}
+
+.slide{
+min-width:100%;
+padding:28px;
+text-align:center;
+color:white;
+}
+
+.promo1{
+background:linear-gradient(135deg,#ff416c,#ff4b2b);
+}
+
+.promo2{
+background:linear-gradient(135deg,#5b2c98,#8e44ad);
+}
+
+.promo3{
+background:linear-gradient(135deg,#ff8c00,#ffb347);
+}
+
+.icon{
+font-size:30px;
+margin-bottom:6px;
+}
+
+.title{
+font-size:18px;
+font-weight:700;
+margin-bottom:6px;
+}
+
+.price{
+font-size:22px;
+margin-bottom:10px;
+}
+
+.desc{
+font-size:15px;
+margin:6px 0;
+line-height:1.4;
+}
+
+#countdown{
+font-size:22px;
+font-weight:700;
+margin-top:6px;
+}
+
 </style>
 </head>
 
@@ -167,8 +229,7 @@ oleh Customer Service
 </div>
 
 <div class="desc">
-Aktif setiap hari
-08.00 – 22.00 WIB
+Aktif setiap hari 08.00 – 22.00 WIB
 </div>
 
 </div>
@@ -176,6 +237,7 @@ Aktif setiap hari
 </div>
 
 </div>
+
   <!-- VOUCHER -->
   <div class="card">
     <h2>Voucher Belanja Elektrik</h2>
@@ -262,6 +324,58 @@ Aktif setiap hari
     VoucherQita © 2025
   </div>
 </div>
+
+<script>
+
+/* ===== SLIDER ===== */
+
+let slideIndex = 0;
+
+function showSlide(){
+
+const slides=document.querySelector(".slides");
+
+slideIndex++;
+
+if(slideIndex>2){
+slideIndex=0;
+}
+
+slides.style.transform="translateX(-"+(slideIndex*100)+"%)";
+
+}
+
+setInterval(showSlide,4000);
+
+
+/* ===== COUNTDOWN ===== */
+
+let promoEnd=new Date().getTime()+ (3*60*60*1000);
+
+let timer=setInterval(function(){
+
+let now=new Date().getTime();
+
+let distance=promoEnd-now;
+
+let hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+let minutes=Math.floor((distance%(1000*60*60))/(1000*60));
+let seconds=Math.floor((distance%(1000*60))/1000);
+
+document.getElementById("countdown").innerHTML=
+hours+":"+minutes+":"+seconds;
+
+if(distance<0){
+
+clearInterval(timer);
+
+document.getElementById("countdown").innerHTML="PROMO SELESAI";
+
+}
+
+},1000);
+
+</script>
 
 </body>
 </html>
