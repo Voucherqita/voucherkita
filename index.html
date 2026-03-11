@@ -402,12 +402,12 @@ function prevSlide(){
 /* ===== COUNTDOWN ===== */
 
 // target: lusa jam 00:00
-const now = new Date();
+let nowDate = new Date();
 
 const promoEnd = new Date(
-  now.getFullYear(),
-  now.getMonth(),
-  now.getDate() + 2,
+  nowDate.getFullYear(),
+  nowDate.getMonth(),
+  nowDate.getDate() + 2,
   0, 0, 0
 ).getTime();
 
