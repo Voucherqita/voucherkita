@@ -156,6 +156,16 @@ font-size:22px;
 font-weight:700;
 margin-top:6px;
 }
+  .join-btn{
+margin-top:12px;
+background:white;
+color:#5b2c98;
+border:none;
+padding:10px 16px;
+border-radius:8px;
+font-weight:600;
+cursor:pointer;
+}
 /* ===== DOT SLIDER ===== */
 
 .slider-dots{
@@ -178,6 +188,54 @@ transition:0.3s;
 background:#5b2c98;
 transform:scale(1.2);
 }
+  /* ===== FORM MEMBER POPUP ===== */
+
+.form-popup{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+.form-box{
+background:white;
+padding:20px;
+border-radius:12px;
+width:90%;
+max-width:320px;
+text-align:center;
+}
+
+.form-box input{
+width:100%;
+padding:10px;
+margin:8px 0;
+border-radius:8px;
+border:1px solid #ccc;
+}
+
+.form-box button{
+width:100%;
+padding:10px;
+margin-top:8px;
+border:none;
+border-radius:8px;
+background:#5b2c98;
+color:white;
+font-weight:600;
+}
+
+.close-btn{
+background:#ccc;
+color:#333;
+}
+
 </style>
 </head>
 
@@ -221,19 +279,21 @@ Promo berakhir dalam
 <div class="icon">💎</div>
 
 <div class="title">
-MEMBER BENEFIT
+MEMBER RESELLER
 </div>
 
 <div class="desc">
-Member bisa membeli voucher
-lebih dari 1 per hari
+Mulai dari Paket 50 Voucher
 </div>
 
 <div class="desc">
-Akses sistem patungan
-untuk pembelian paket voucher
+Nikmati berbagai keuntungan reseller
 </div>
 
+  <button class="join-btn" onclick="openForm()">
+Join Member
+</button>
+  
 </div>
 
 <div class="slide promo3">
@@ -323,7 +383,27 @@ Aktif setiap hari 08.00 – 23.45 WIB
   </div>
 
 </div>
+<div id="memberForm" class="form-popup">
 
+<div class="form-box">
+
+<h3>Daftar Member</h3>
+
+<input type="text" id="nama" placeholder="Nama">
+
+<input type="text" id="kota" placeholder="Kota">
+
+<input type="text" id="hp" placeholder="Nomor HP">
+
+<button onclick="kirimMember()">Kirim</button>
+
+<button onclick="closeForm()" class="close-btn">
+Batal
+</button>
+
+</div>
+
+</div>
 <div class="footer">
 
 <div class="card">
@@ -489,6 +569,34 @@ pad(hours) + ":" + pad(minutes) + ":" + pad(seconds);
 
 updateCountdown();
 setInterval(updateCountdown,1000);
+
+}
+  /* ===== FORM MEMBER ===== */
+
+function openForm(){
+document.getElementById("memberForm").style.display="flex";
+}
+
+function closeForm(){
+document.getElementById("memberForm").style.display="none";
+}
+
+function kirimMember(){
+
+let nama=document.getElementById("nama").value;
+let kota=document.getElementById("kota").value;
+let hp=document.getElementById("hp").value;
+
+let pesan =
+`DAFTAR MEMBER VOUCHERQITA
+
+Nama : ${nama}
+Kota : ${kota}
+No HP : ${hp}`;
+
+window.open(
+"https://api.whatsapp.com/send?phone=6285763492378&text="+encodeURIComponent(pesan)
+);
 
 }
 
