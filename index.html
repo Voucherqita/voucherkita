@@ -156,7 +156,28 @@ font-size:22px;
 font-weight:700;
 margin-top:6px;
 }
+/* ===== DOT SLIDER ===== */
 
+.slider-dots{
+text-align:center;
+margin-top:8px;
+}
+
+.dot{
+height:8px;
+width:8px;
+margin:0 4px;
+background:#ccc;
+border-radius:50%;
+display:inline-block;
+cursor:pointer;
+transition:0.3s;
+}
+
+.dot.active{
+background:#5b2c98;
+transform:scale(1.2);
+}
 </style>
 </head>
 
@@ -235,6 +256,15 @@ Aktif setiap hari 08.00 – 23.45 WIB
 </div>
 
 </div>
+
+</div>
+
+<!-- DOT SLIDER -->
+<div class="slider-dots">
+
+<span class="dot active" onclick="goToSlide(0)"></span>
+<span class="dot" onclick="goToSlide(1)"></span>
+<span class="dot" onclick="goToSlide(2)"></span>
 
 </div>
 
@@ -330,6 +360,17 @@ Aktif setiap hari 08.00 – 23.45 WIB
 /* ===== SLIDER ===== */
 
 let slideIndex = 0;
+  function updateDots(){
+
+const dots = document.querySelectorAll(".dot");
+
+dots.forEach(dot => dot.classList.remove("active"));
+
+if(dots[slideIndex]){
+dots[slideIndex].classList.add("active");
+}
+
+}
 
 function showSlide(){
 
@@ -343,7 +384,9 @@ slideIndex = 0;
 }
 
 slides.style.transform = "translateX(-"+(slideIndex*100)+"%)";
-
+  
+updateDots();
+  
 }
 
 setInterval(showSlide,4000);
@@ -446,6 +489,19 @@ pad(hours) + ":" + pad(minutes) + ":" + pad(seconds);
 
 updateCountdown();
 setInterval(updateCountdown,1000);
+
+}
+
+  function goToSlide(n){
+
+const slides = document.querySelector(".slides");
+
+slideIndex = n;
+
+slides.style.transform =
+"translateX(-"+(slideIndex*100)+"%)";
+
+updateDots();
 
 }
 
