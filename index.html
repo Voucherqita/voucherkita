@@ -438,10 +438,6 @@ Aktif setiap hari 08.00 – 23.45 WIB
 <!-- DOT SLIDER -->
 <div class="slider-dots">
 
-<span class="dot active" onclick="goToSlide(0)"></span>
-<span class="dot" onclick="goToSlide(1)"></span>
-<span class="dot" onclick="goToSlide(2)"></span>
-
 </div>
 
   <!-- VOUCHER -->
@@ -556,6 +552,28 @@ Batal
 /* ===== SLIDER ===== */
 
 let slideIndex = 0;
+  function createDots(){
+
+const slides = document.querySelectorAll(".slide");
+const dotsContainer = document.querySelector(".slider-dots");
+
+slides.forEach((slide, index) => {
+
+const dot = document.createElement("span");
+
+dot.classList.add("dot");
+
+if(index === 0){
+dot.classList.add("active");
+}
+
+dot.onclick = () => goToSlide(index);
+
+dotsContainer.appendChild(dot);
+
+});
+
+}
   function updateDots(){
 
 const dots = document.querySelectorAll(".dot");
@@ -733,5 +751,7 @@ slides.style.transform =
 updateDots();
 
 }
-
+  
+createDots();
+  
 </script>
