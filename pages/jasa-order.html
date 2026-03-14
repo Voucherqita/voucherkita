@@ -153,6 +153,19 @@ return;
 
 total=harga*jumlah;
 
+  if(total < 100000){
+
+document.getElementById("hasil").innerHTML =
+"<span style='color:red;font-weight:bold'>"+
+"Minimal belanja harus mencapai Rp 100.000 karena menggunakan voucher belanja."+
+"</span>";
+
+document.getElementById("opsi").innerHTML = "";
+
+return;
+
+}
+
 voucher=Math.floor(total/100000);
 
 potongan=voucher*10000;
