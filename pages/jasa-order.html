@@ -94,7 +94,7 @@ margin-bottom:10px;
 <input type="text" id="produk" placeholder="Contoh: Syrup Marjan">
 
 <label>Harga Toko (per pcs)</label>
-<input type="number" id="harga" placeholder="Contoh: 17500">
+<input type="text" id="harga" placeholder="Contoh: 17.500" oninput="formatRupiah(this)">
 
 <p class="note">
 Tidak tahu harga toko?<br>
@@ -128,13 +128,22 @@ let voucher=0;
 let potongan=0;
 let bayar=0;
 
+
 function rupiah(angka){
 return new Intl.NumberFormat('id-ID').format(angka);
 }
 
+function formatRupiah(input){
+
+let angka = input.value.replace(/\D/g,'');
+
+input.value = new Intl.NumberFormat('id-ID').format(angka);
+
+}
+
 function hitung(){
 
-let harga=document.getElementById("harga").value;
+let harga=document.getElementById("harga").value.replace(/\./g,'');
 let jumlah=document.getElementById("jumlah").value;
 
 if(harga=="" || jumlah==""){
@@ -172,8 +181,8 @@ function punyaToko(){
 
 document.getElementById("opsi").innerHTML=`
 
-<label>Nama / Alamat Toko Alfamart</label>
-<input type="text" id="toko" placeholder="Contoh: Alfamart Jengki Kudus">
+<label>Kode Toko Alfamart</label>
+<input type="text" id="toko" placeholder="Contoh: A1234">
 
 <button class="order" onclick="kirimWA()">Kirim Order ke WhatsApp</button>
 
@@ -201,7 +210,7 @@ Diskon Jasa : ${rupiah(potongan)}
 
 Total Bayar : ${rupiah(bayar)}
 
-Toko Alfamart :
+Kode Toko Alfamart :
 ${toko}
 `;
 
