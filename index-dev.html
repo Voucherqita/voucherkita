@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
+
 :root{
   --primary:#5b2c98;
   --bg:#f5f5f7;
@@ -15,34 +16,41 @@
   --muted:#666;
   --shadow:0 6px 18px rgba(0,0,0,0.08);
 }
+
 *{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:Poppins,sans-serif;
   background:var(--bg);
   color:#111;
 }
+
 header{
   background:var(--primary);
   color:#fff;
   padding:20px 16px;
   text-align:center;
 }
+
 header h1{
   margin:0;
   font-size:22px;
   font-weight:700;
 }
+
 header p{
   margin:6px 0 0;
   font-size:13px;
   opacity:.9;
 }
+
 .container{
   max-width:640px;
   margin:auto;
   padding:16px;
 }
+
 .warning{
   background:#fff8e1;
   border:1px solid #ffe0b2;
@@ -53,6 +61,7 @@ header p{
   line-height:1.5;
   margin-bottom:18px;
 }
+
 .card{
   background:var(--card);
   border-radius:16px;
@@ -61,15 +70,18 @@ header p{
   margin-bottom:18px;
   text-align:center;
 }
+
 .card h2{
   margin:0 0 8px;
   font-size:18px;
 }
+
 .card p{
   margin:0 0 18px;
   font-size:13px;
   color:var(--muted);
 }
+
 .card a{
   display:block;
   padding:14px;
@@ -78,18 +90,22 @@ header p{
   font-weight:700;
   color:#fff;
 }
+
 .btn-voucher{
   background:#5b2c98;
 }
+
 .btn-tools{
   background:#333;
 }
+
 .footer{
   text-align:center;
   font-size:12px;
   color:#777;
   padding:20px 10px;
 }
+
 .footer a{
   color:#5b2c98;
   text-decoration:none;
@@ -99,293 +115,298 @@ header p{
 /* ===== SLIDER PROMO ===== */
 
 .promo-slider{
-margin-bottom:18px;
-overflow:hidden;
-border-radius:16px;
-box-shadow:var(--shadow);
+  margin-bottom:18px;
+  overflow:hidden;
+  border-radius:16px;
+  box-shadow:var(--shadow);
 }
 
 .slides{
-display:flex;
-transition:transform 0.6s ease;
+  display:flex;
+  transition:transform 0.6s ease;
 }
 
 .slide{
-min-width:100%;
-padding:28px;
-text-align:center;
-color:white;
+  min-width:100%;
+  padding:28px;
+  text-align:center;
+  color:white;
+  position:relative;
 }
 
+/* ===== SLIDE WARNA ===== */
+
 .promo1{
-background:linear-gradient(135deg,#ff416c,#ff4b2b);
+  background:linear-gradient(135deg,#ff416c,#ff4b2b);
 }
 
 .promo2{
-background:linear-gradient(135deg,#5b2c98,#8e44ad);
+  background:linear-gradient(135deg,#5b2c98,#8e44ad);
 }
 
 .promo3{
-background:linear-gradient(135deg,#ff8c00,#ffb347);
+  background:linear-gradient(135deg,#ff8c00,#ffb347);
 }
+
 .promo0{
-background:linear-gradient(135deg,#00c6ff,#0072ff);
+  background:linear-gradient(135deg,#00c6ff,#0072ff);
 }
-  
+
 .icon{
-font-size:30px;
-margin-bottom:6px;
+  font-size:30px;
+  margin-bottom:6px;
 }
 
 .title{
-font-size:18px;
-font-weight:700;
-margin-bottom:6px;
+  font-size:18px;
+  font-weight:700;
+  margin-bottom:6px;
 }
 
 .price{
-font-size:22px;
-margin-bottom:10px;
+  font-size:22px;
+  margin-bottom:10px;
 }
 
 .desc{
-font-size:15px;
-margin:6px 0;
-line-height:1.4;
+  font-size:15px;
+  margin:6px 0;
+  line-height:1.4;
 }
 
 #countdown{
-font-size:22px;
-font-weight:700;
-margin-top:6px;
+  font-size:22px;
+  font-weight:700;
+  margin-top:6px;
 }
 
-/* MARKETPLACE STYLE BANNER */
+/* ===== BANNER PROMO PRODUK ===== */
 
 .slide.promo-hot{
-background:linear-gradient(135deg,#2e7d32,#66bb6a);
-padding:20px;
-text-align:center;
-color:white;
-border-radius:16px;
-position:relative;
-overflow:hidden;
-box-shadow:0 8px 25px rgba(0,0,0,0.2);
+  background:linear-gradient(135deg,#2e7d32,#66bb6a) !important;
+  padding:20px;
+  border-radius:16px;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 8px 25px rgba(0,0,0,0.25);
 }
-/* KETUPAT KIRI */
+
+/* ===== KETUPAT KIRI ===== */
 
 .slide.promo-hot::before{
-content:"";
-position:absolute;
-left:10px;
-top:10px;
-width:90px;
-height:90px;
-background:url("assets/ketupat.png");
-background-size:contain;
-background-repeat:no-repeat;
-opacity:0.9;
-animation:ketupatFloat 4s ease-in-out infinite;
-filter:drop-shadow(0 4px 6px rgba(0,0,0,0.3));
-z-index:1;
+  content:"";
+  position:absolute;
+  left:15px;
+  top:15px;
+  width:110px;
+  height:110px;
+  background:url("assets/ketupat.png") no-repeat center;
+  background-size:contain;
+  opacity:0.9;
+  animation:ketupatFloat 4s ease-in-out infinite;
+  filter:drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+  z-index:1;
 }
 
-/* KETUPAT KANAN */
+/* ===== KETUPAT KANAN ===== */
 
 .slide.promo-hot::after{
-content:"";
-position:absolute;
-right:10px;
-top:10px;
-width:90px;
-height:90px;
-background:url("assets/ketupat.png");
-background-size:contain;
-background-repeat:no-repeat;
-opacity:0.9;
-animation:ketupatFloat 4s ease-in-out infinite;
-filter:drop-shadow(0 4px 6px rgba(0,0,0,0.3));
-z-index:1;
-}
-  
-.promo-header{
-font-size:26px;
-font-weight:900;
-letter-spacing:2px;
-margin-bottom:14px;
-text-shadow:0 3px 10px rgba(0,0,0,0.4);
+  content:"";
+  position:absolute;
+  right:15px;
+  top:15px;
+  width:110px;
+  height:110px;
+  background:url("assets/ketupat.png") no-repeat center;
+  background-size:contain;
+  opacity:0.9;
+  animation:ketupatFloat 4s ease-in-out infinite;
+  filter:drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+  z-index:1;
 }
 
-.product-row{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:8px;
-margin-top:10px;
-position:relative;
-z-index:2;
+/* ===== JUDUL BANNER ===== */
+
+.promo-header{
+  font-size:26px;
+  font-weight:900;
+  letter-spacing:2px;
+  margin-bottom:14px;
+  text-shadow:0 3px 10px rgba(0,0,0,0.4);
 }
+
+/* ===== GRID PRODUK ===== */
+
+.product-row{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:10px;
+  position:relative;
+  z-index:2;
+}
+
 .product-box{
-background:white;
-color:#333;
-border-radius:12px;
-padding:12px;
-text-align:center;
-box-shadow:0 4px 10px rgba(0,0,0,0.2);
-transition:transform .2s;
-min-height:120px;
+  background:white;
+  color:#333;
+  border-radius:12px;
+  padding:12px;
+  text-align:center;
+  box-shadow:0 4px 10px rgba(0,0,0,0.2);
+  transition:transform .2s;
+  min-height:120px;
 }
 
 .product-box:hover{
-transform:scale(1.05);
-}
-  
-.product-title{
-font-size:11px;
-margin-bottom:4px;
-font-weight:600;
-line-height:1.2;
-}
-  
-.product-price{
-color:#ff3d00;
-font-weight:800;
-font-size:16px;
-margin-top:4px;
+  transform:scale(1.05);
 }
 
-/* posisi item ke 4 (bawah kiri) */
+.product-box img{
+  width:100%;
+  height:80px;
+  object-fit:contain;
+  display:block;
+  margin-bottom:6px;
+}
+
+.product-title{
+  font-size:11px;
+  margin-bottom:4px;
+  font-weight:600;
+  line-height:1.2;
+}
+
+.product-price{
+  color:#ff3d00;
+  font-weight:800;
+  font-size:16px;
+  margin-top:4px;
+}
+
+/* ===== POSISI PRODUK BAWAH ===== */
 
 .product-box:nth-child(4){
-grid-column:1 / span 1;
+  grid-column:1;
 }
-
-/* posisi item ke 5 (bawah kanan) */
 
 .product-box:nth-child(5){
-grid-column:3 / span 1;
+  grid-column:3;
 }
 
-/* tanggal promo */
+/* ===== FOOTER PROMO ===== */
 
 .promo-footer{
-margin-top:10px;
-font-size:12px;
+  margin-top:10px;
+  font-size:12px;
 }
 
-/* tombol klik */
+/* ===== TOMBOL ===== */
 
 .promo-btn{
-display:inline-block;
-margin-top:14px;
-background:white;
-color:#ff512f;
-padding:10px 18px;
-border-radius:20px;
-font-weight:700;
-text-decoration:none;
-font-size:14px;
-box-shadow:0 3px 6px rgba(0,0,0,0.2);
+  display:inline-block;
+  margin-top:14px;
+  background:white;
+  color:#ff512f;
+  padding:10px 18px;
+  border-radius:20px;
+  font-weight:700;
+  text-decoration:none;
+  font-size:14px;
+  box-shadow:0 3px 6px rgba(0,0,0,0.2);
 }
-  
-/* tombol join member */
+
+/* ===== JOIN BUTTON ===== */
 
 .join-btn{
-margin-top:12px;
-background:white;
-color:#5b2c98;
-border:none;
-padding:10px 16px;
-border-radius:8px;
-font-weight:600;
-cursor:pointer;
+  margin-top:12px;
+  background:white;
+  color:#5b2c98;
+  border:none;
+  padding:10px 16px;
+  border-radius:8px;
+  font-weight:600;
+  cursor:pointer;
 }
+
 /* ===== DOT SLIDER ===== */
 
 .slider-dots{
-text-align:center;
-margin-top:8px;
+  text-align:center;
+  margin-top:8px;
 }
 
 .dot{
-height:8px;
-width:8px;
-margin:0 4px;
-background:#ccc;
-border-radius:50%;
-display:inline-block;
-cursor:pointer;
-transition:0.3s;
+  height:8px;
+  width:8px;
+  margin:0 4px;
+  background:#ccc;
+  border-radius:50%;
+  display:inline-block;
+  cursor:pointer;
+  transition:0.3s;
 }
 
 .dot.active{
-background:#5b2c98;
-transform:scale(1.2);
+  background:#5b2c98;
+  transform:scale(1.2);
 }
-  /* ===== FORM MEMBER POPUP ===== */
+
+/* ===== FORM POPUP ===== */
 
 .form-popup{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.5);
-justify-content:center;
-align-items:center;
-z-index:999;
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.5);
+  justify-content:center;
+  align-items:center;
+  z-index:999;
 }
 
 .form-box{
-background:white;
-padding:20px;
-border-radius:12px;
-width:90%;
-max-width:320px;
-text-align:center;
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  width:90%;
+  max-width:320px;
+  text-align:center;
 }
 
 .form-box input{
-width:100%;
-padding:10px;
-margin:8px 0;
-border-radius:8px;
-border:1px solid #ccc;
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border-radius:8px;
+  border:1px solid #ccc;
 }
 
 .form-box button{
-width:100%;
-padding:10px;
-margin-top:8px;
-border:none;
-border-radius:8px;
-background:#5b2c98;
-color:white;
-font-weight:600;
+  width:100%;
+  padding:10px;
+  margin-top:8px;
+  border:none;
+  border-radius:8px;
+  background:#5b2c98;
+  color:white;
+  font-weight:600;
 }
 
 .close-btn{
-background:#ccc;
-color:#333;
+  background:#ccc;
+  color:#333;
 }
-  /* ===== ANIMASI KETUPAT ===== */
+
+/* ===== ANIMASI KETUPAT ===== */
 
 @keyframes ketupatFloat{
-0%{transform:translateY(0)}
-50%{transform:translateY(-6px)}
-100%{transform:translateY(0)}
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+  100%{transform:translateY(0)}
 }
 
-/* ===== FIX GAMBAR PRODUK ===== */
-
-.product-box img{
-width:100%;
-height:80px;
-object-fit:contain;
-display:block;
-margin-bottom:6px;
-}
-  
 </style>
 </head>
 
