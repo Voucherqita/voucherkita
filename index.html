@@ -170,29 +170,33 @@ color:white;
 }
 
 .promo-header{
-font-weight:700;
-font-size:16px;
+font-weight:800;
+font-size:22px;
 margin-bottom:12px;
+letter-spacing:1px;
+text-transform:uppercase;
 }
 
 .product-row{
-display:flex;
+display:grid;
+grid-template-columns:repeat(3,1fr);
 gap:8px;
-justify-content:space-between;
+margin-top:10px;
 }
 
 .product-box{
 background:white;
 color:#333;
 border-radius:10px;
-padding:8px;
-flex:1;
+padding:10px;
 text-align:center;
+box-shadow:0 3px 8px rgba(0,0,0,0.15);
 }
 
 .product-title{
 font-size:12px;
 margin-bottom:4px;
+font-weight:600;
 }
 
 .product-price{
@@ -201,10 +205,26 @@ font-weight:700;
 font-size:14px;
 }
 
+/* posisi item ke 4 (bawah kiri) */
+
+.product-box:nth-child(4){
+grid-column:1 / span 1;
+}
+
+/* posisi item ke 5 (bawah kanan) */
+
+.product-box:nth-child(5){
+grid-column:3 / span 1;
+}
+
+/* tanggal promo */
+
 .promo-footer{
 margin-top:10px;
 font-size:12px;
 }
+
+/* tombol klik */
 
 .promo-btn{
 display:inline-block;
@@ -218,7 +238,9 @@ text-decoration:none;
 font-size:13px;
 }
 
-  .join-btn{
+/* tombol join member */
+
+.join-btn{
 margin-top:12px;
 background:white;
 color:#5b2c98;
@@ -317,38 +339,47 @@ color:#333;
 <div class="slide promo-hot">
 
 <div class="promo-header">
- PROMO BARANG POPULER
+PROMO BARANG POPULER
 </div>
 
 <div class="product-row">
 
 <div class="product-box">
-<div class="product-title">Sunco 2L</div>
+<div class="product-title">SUNCO 2L</div>
 <div class="product-price">223.000</div>
 </div>
 
 <div class="product-box">
-<div class="product-title">Marjan Boudoin</div>
+<div class="product-title">BIMOLI 2L</div>
+<div class="product-price">218.200</div>
+</div>
+
+<div class="product-box">
+<div class="product-title">MARJAN BOUDOIN 460ML</div>
 <div class="product-price">190.000</div>
 </div>
 
 <div class="product-box">
-<div class="product-title">Tango Wafer 240g</div>
+<div class="product-title">TANGO WAFER 240G</div>
 <div class="product-price">103.000</div>
+</div>
+
+<div class="product-box">
+<div class="product-title">ABC SQUASH DELIGHT</div>
+<div class="product-price">89.600</div>
 </div>
 
 </div>
 
 <div class="promo-footer">
-Hanya 3 Hari • 13–15 Maret
+13 – 15 MARET 2026
 </div>
 
 <a href="pages/jasa-order.html" class="promo-btn">
-Klik Disini
+KLIK DISINI
 </a>
 
 </div>
-  
   <div class="slide promo0">
 
 <div class="icon">🛒</div>
