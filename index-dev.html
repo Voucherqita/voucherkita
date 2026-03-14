@@ -169,6 +169,8 @@ text-align:center;
 color:white;
 border-radius:16px;
 position:relative;
+overflow:hidden;
+box-shadow:0 8px 25px rgba(0,0,0,0.2);
 }
 
 /* KETUPAT KIRI */
@@ -178,12 +180,14 @@ content:"";
 position:absolute;
 left:10px;
 top:10px;
-width:60px;
-height:60px;
+width:90px;
+height:90px;
 background:url("assets/ketupat.png");
 background-size:contain;
 background-repeat:no-repeat;
-opacity:0.8;
+opacity:0.9;
+animation:ketupatFloat 4s ease-in-out infinite;
+filter:drop-shadow(0 4px 6px rgba(0,0,0,0.3));
 }
 
 /* KETUPAT KANAN */
@@ -193,20 +197,22 @@ content:"";
 position:absolute;
 right:10px;
 top:10px;
-width:60px;
-height:60px;
+width:90px;
+height:90px;
 background:url("assets/ketupat.png");
 background-size:contain;
 background-repeat:no-repeat;
-opacity:0.8;
+opacity:0.9;
+animation:ketupatFloat 4s ease-in-out infinite;
+filter:drop-shadow(0 4px 6px rgba(0,0,0,0.3));
 }
   
 .promo-header{
-font-size:24px;
-font-weight:800;
-letter-spacing:1px;
+font-size:26px;
+font-weight:900;
+letter-spacing:2px;
 margin-bottom:14px;
-text-shadow:0 2px 6px rgba(0,0,0,0.3);
+text-shadow:0 3px 10px rgba(0,0,0,0.4);
 }
 
 .product-row{
@@ -359,6 +365,13 @@ font-weight:600;
 .close-btn{
 background:#ccc;
 color:#333;
+}
+  /* ===== ANIMASI KETUPAT ===== */
+
+@keyframes ketupatFloat{
+0%{transform:translateY(0)}
+50%{transform:translateY(-6px)}
+100%{transform:translateY(0)}
 }
 
 /* ===== FIX GAMBAR PRODUK ===== */
