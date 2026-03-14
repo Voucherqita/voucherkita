@@ -122,17 +122,18 @@ header p{
 }
 
 .slides{
-display:flex;
-transition:transform 0.6s ease;
+  display:flex;
+  transition:transform 0.6s ease;
 }
-  
+
 .slide{
-min-width:100%;
-padding:28px;
-text-align:center;
-color:white;
+  min-width:100%;
+  padding:28px;
+  text-align:center;
+  color:white;
+  position:relative;
 }
-  
+
 /* ===== SLIDE WARNA ===== */
 
 .promo1{
@@ -187,8 +188,7 @@ url("assets/ketupat.png") left -20px top -20px no-repeat,
 url("assets/ketupat.png") right -20px top -20px no-repeat,
 linear-gradient(135deg,#2e7d32,#66bb6a);
 
-background-size:90px,90px,auto;
-background-blend-mode:soft-light;
+background-size:120px,120px,auto;
 
 padding:20px;
 border-radius:16px;
@@ -230,12 +230,11 @@ animation:ketupatFloat 4s ease-in-out infinite;
 /* ===== JUDUL BANNER ===== */
 
 .promo-header{
-font-size:26px;
-font-weight:900;
-letter-spacing:2px;
-margin-bottom:14px;
-text-shadow:0 3px 10px rgba(0,0,0,0.4),
-0 0 10px rgba(255,255,255,0.4);
+  font-size:26px;
+  font-weight:900;
+  letter-spacing:2px;
+  margin-bottom:14px;
+  text-shadow:0 3px 10px rgba(0,0,0,0.4);
 }
 
 /* ===== GRID PRODUK ===== */
@@ -270,11 +269,6 @@ text-shadow:0 3px 10px rgba(0,0,0,0.4),
   object-fit:contain;
   display:block;
   margin-bottom:6px;
-}
-
-.promo0 .desc:first-of-type{
-font-weight:700;
-font-size:16px;
 }
 
 .product-title{
@@ -479,27 +473,23 @@ KLIK DISINI
 </a>
 
 </div>
-<div class="slide promo0">
+  <div class="slide promo0">
 
 <div class="icon">🛒</div>
 
 <div class="title">
-MALAS BELANJA?
+FITUR BARU
 </div>
 
 <div class="desc">
-BIAR KAMI YANG ORDER
+JASA ORDER ALFAGIFT
 </div>
 
 <div class="desc">
-ALFAGIFT UNTUK ANDA
+Admin bantu order
+tanpa perlu keliling toko
 </div>
 
-<a href="pages/jasa-order.html" class="order-btn">
-ORDER SEKARANG
-</a>
-</div>
-  
 </div>
   
 <div class="slide promo1">
