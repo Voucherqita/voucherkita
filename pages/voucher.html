@@ -93,7 +93,12 @@ color:#111;
 font-weight:700;
 }
 .qty-controls input{width:42px;padding:6px;border:1px solid #eee;border-radius:6px;text-align:center}
-
+  
+/* tombol qty tetap hitam walau background card berubah */
+.product-card.indomaret .qty-controls button,
+.product-card.alfamart .qty-controls button{
+color:#111;
+}
 .total-section{margin-top:12px;padding:14px;background:var(--card);border-radius:10px;box-shadow:var(--shadow);text-align:right;font-weight:800}
 .checkout-btn{width:100%;margin-top:10px;padding:12px;border-radius:8px;background:var(--success);color:#fff;border:none;font-weight:700;cursor:pointer}
 
@@ -465,9 +470,9 @@ function renderProducts() {
     const item  = cart.find(i => i.brand === currentBrand && i.nominal === n);
     const qty   = item ? item.qty : 0;
     const isDisabled = DISABLED_NOMINALS.includes(n);
-
-    const card = document.createElement('div');
-    card.className = 'product-card';
+    
+const card = document.createElement('div');
+card.className = 'product-card ' + currentBrand.toLowerCase();
     if (isDisabled) {
       card.style.opacity = '0.45';
       card.style.pointerEvents = 'none';
