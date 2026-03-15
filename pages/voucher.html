@@ -26,15 +26,29 @@ padding:16px
 }
 
 .product-card{
-background:var(--card);
+background:linear-gradient(135deg,#0072ce,#00a3e0);
 border-radius:16px;
 padding:16px;
-box-shadow:0 8px 20px rgba(0,0,0,0.08);
+box-shadow:0 8px 20px rgba(0,0,0,0.12);
 display:flex;
 flex-direction:column;
 align-items:center;
 justify-content:center;
 transition:0.2s;
+color:#fff;
+border-top:6px solid #ffcc00;
+}
+
+.product-card h3{
+color:#fff;
+}
+
+.product-card .price{
+color:#fff;
+}
+
+.product-card .old-price{
+color:#e0e0e0;
 }
 
 .product-card:hover{
@@ -79,7 +93,21 @@ transform:scale(0.95);
 .total-section{margin-top:12px;padding:14px;background:var(--card);border-radius:10px;box-shadow:var(--shadow);text-align:right;font-weight:800}
 .checkout-btn{width:100%;margin-top:10px;padding:12px;border-radius:8px;background:var(--success);color:#fff;border:none;font-weight:700;cursor:pointer}
 
-.floating-cart{position:fixed;right:20px;bottom:20px;width:56px;height:56px;border-radius:50%;background:#fff;display:none;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(0,0,0,0.15);z-index:60;cursor:pointer}
+.floating-cart{
+position:fixed;
+right:20px;
+bottom:20px;
+width:56px;
+height:56px;
+border-radius:50%;
+background:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+box-shadow:0 8px 20px rgba(0,0,0,0.15);
+z-index:60;
+cursor:pointer;
+}
 .badge{position:absolute;top:-6px;right:-6px;background:#e63946;color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;transform-origin:center;transition:transform .18s cubic-bezier(.2,.9,.3,1)}
 
 .toast-wrap{position:fixed;left:50%;transform:translateX(-50%);bottom:90px;z-index:80;display:flex;flex-direction:column;gap:8px}
@@ -459,7 +487,7 @@ function renderProducts() {
   btn.textContent = 'Tambah';
   btn.style.display = qty ? 'none' : 'block';
   btn.onclick = () => addThenShowQty(n);
-
+      
   const qc = document.createElement('div');
   qc.className = 'qty-controls';
   qc.style.display = qty ? 'flex' : 'none';
@@ -491,16 +519,22 @@ function addThenShowQty(n) {
 }
 
 // 🔥 FIX UTAMA
-function changeQty(brand, n, d) {
-  let it = cart.find(i => i.brand === brand && i.nominal === n);
-  if (!it) return;
+function changeQty(brand, nominal, delta){
+  let item = cart.find(i => i.brand===brand && i.nominal===nominal);
 
-  it.qty += d;
-  if (it.qty <= 0) cart = cart.filter(i => i !== it);
+  if(!item){
+    cart.push({brand, nominal, qty:1});
+  }else{
+    item.qty += delta;
+    if(item.qty<=0){
+      cart = cart.filter(i => !(i.brand===brand && i.nominal===nominal));
+    }
+  }
 
   saveCart();
-  updateCartBadge();
   renderProducts();
+  updateCartBadge();
+}
   if (cartView.style.display === 'block') renderCart();
 }
 
