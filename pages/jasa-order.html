@@ -89,6 +89,20 @@ margin-bottom:10px;
 <div class="container">
 
 <h3>Jasa Order Alfagift</h3>
+  <div class="info">
+
+<b>Cara Order Jasa Belanja</b><br><br>
+
+1. Cari produk di aplikasi <b>Alfagift</b> terlebih dahulu.<br>
+2. Masukkan <b>Nama Barang</b> atau <b>PLU</b> produk.<br>
+3. Masukkan <b>Harga Toko</b> sesuai yang tertera di Alfagift.<br>
+4. Isi <b>Jumlah Barang</b> yang ingin dibeli.<br>
+5. Klik <b>Hitung Harga</b> untuk melihat total pembayaran.<br>
+6. Setelah itu kirim order melalui WhatsApp.<br><br>
+
+Pesanan diproses sesuai <b>nomor antrian</b>.
+
+</div>
 
 <label>Nama Barang / PLU</label>
 <input type="text" id="produk" placeholder="Contoh: Syrup Marjan">
@@ -209,9 +223,18 @@ let produk=document.getElementById("produk").value;
 let harga=document.getElementById("harga").value;
 let jumlah=document.getElementById("jumlah").value;
 let toko=document.getElementById("toko").value;
+let antrian = parseInt(localStorage.getItem("vq_antrian") || "0");
+antrian++;
 
+localStorage.setItem("vq_antrian", antrian);
+
+let orderId = "VQ-" + Math.floor(1000 + Math.random() * 9000);
+let pesan=
 let pesan=
 `ORDER JASA BELANJA VOUCHERQITA
+
+ORDER ID : ${orderId}
+ANTRIAN : #${antrian}
 
 Produk : ${produk}
 Harga Toko : ${harga}
