@@ -99,6 +99,15 @@ text-decoration:none;
 .faq a:hover{
 text-decoration:underline;
 }
+
+.info{
+background:#e8f0ff;
+padding:15px;
+border-radius:8px;
+margin-bottom:20px;
+font-size:13px;
+line-height:1.6;
+}
 </style>
 </head>
 
@@ -107,7 +116,6 @@ text-decoration:underline;
 <div class="container">
 
 <h3>Jasa Order Alfagift</h3>
-  <h3>Jasa Order Alfagift</h3>
 
 <div class="faq">
 
@@ -127,21 +135,42 @@ Di aplikasi Alfagift tersedia fitur lokasi toko sehingga Anda dapat langsung mel
 
 </div>
 
+
 <div class="info">
-  <div class="info">
 
-<b>Cara Order Jasa Belanja</b><br><br>
+<b>Alur Pemesanan Jasa Belanja</b><br><br>
 
-1. Cari produk di aplikasi <b>Alfagift</b> terlebih dahulu.<br>
-2. Masukkan <b>Nama Barang</b> atau <b>PLU</b> produk.<br>
-3. Masukkan <b>Harga Toko</b> sesuai yang tertera di Alfagift.<br>
-4. Isi <b>Jumlah Barang</b> yang ingin dibeli.<br>
-5. Klik <b>Hitung Harga</b> untuk melihat total pembayaran.<br>
-6. Setelah itu kirim order melalui WhatsApp.<br><br>
+1. Cari produk yang ingin dibeli melalui aplikasi <b>Alfagift</b>.<br>
+2. Masukkan <b>Nama Barang</b>, <b>Harga Toko</b>, dan <b>Jumlah Barang</b> pada form pemesanan.<br>
+3. Klik tombol <b>Hitung Harga</b> untuk melihat total pembayaran.<br>
+4. Kirim pesanan melalui <b>WhatsApp</b>.<br>
+5. Pesanan akan diproses sesuai <b>nomor antrian</b>.<br>
+6. Setelah pesanan diproses, barang akan tersedia di toko Alfamart sesuai <b>kode toko</b> yang Anda masukkan.<br>
+7. Customer Service akan mengirimkan <b>nomor pesanan</b> melalui WhatsApp sebagai konfirmasi.<br><br>
 
-Pesanan diproses sesuai <b>nomor antrian</b>.
+Barang dapat diambil langsung di toko Alfamart sesuai kode toko yang Anda pilih.
+
+<p style="font-size:13px;color:#555;margin-top:8px;">
+Pastikan kode toko yang Anda masukkan adalah toko yang ingin Anda kunjungi untuk mengambil pesanan.
+</p>
 
 </div>
+</div>
+
+<div style="text-align:center;margin:20px 0;">
+
+<button class="btn-open" onclick="bukaForm()">
+🚀 Order Sekarang
+</button>
+
+</div>
+
+
+<div id="modalForm" class="modal">
+
+<div class="modal-content">
+
+<span class="close" onclick="tutupForm()">×</span>
 
 <label>Nama Barang / PLU</label>
 <input type="text" id="produk" placeholder="Contoh: Syrup Marjan">
@@ -173,6 +202,7 @@ Silakan gunakan harga dari Alfagift sebagai acuan sebelum melakukan order.
 </p>
 
 </div>
+</div>
 
 <script>
 
@@ -180,7 +210,6 @@ let total=0;
 let voucher=0;
 let potongan=0;
 let bayar=0;
-
 
 function rupiah(angka){
 return new Intl.NumberFormat('id-ID').format(angka);
