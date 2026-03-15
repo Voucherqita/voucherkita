@@ -121,6 +121,35 @@ cursor:pointer;
 width:100%;
 max-width:220px;
 }
+  .modal{
+display:none;
+position:fixed;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+z-index:999;
+}
+
+.modal-content{
+background:white;
+padding:20px;
+border-radius:10px;
+width:90%;
+max-width:420px;
+margin:8% auto;
+position:relative;
+}
+
+.close{
+position:absolute;
+right:15px;
+top:10px;
+font-size:22px;
+cursor:pointer;
+font-weight:bold;
+}
 
 </style>
 </head>
@@ -219,7 +248,14 @@ Silakan gunakan harga dari Alfagift sebagai acuan sebelum melakukan order.
 </div>
 
 <script>
+  
+function bukaForm(){
+document.getElementById("modalForm").style.display = "block";
+}
 
+function tutupForm(){
+document.getElementById("modalForm").style.display = "none";
+}
 let total=0;
 let voucher=0;
 let potongan=0;
@@ -347,7 +383,15 @@ window.open(url);
 
 }
 
-</script>
 
+// TUTUP MODAL SAAT KLIK AREA GELAP
+window.onclick = function(event) {
+let modal = document.getElementById("modalForm");
+if (event.target == modal) {
+modal.style.display = "none";
+}
+}
+
+</script>
 </body>
 </html>
