@@ -2,6 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="utf-8" />
+<meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>VoucherQita - Voucher Digital</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -79,7 +80,22 @@ transform:scale(0.95);
 .total-section{margin-top:12px;padding:14px;background:var(--card);border-radius:10px;box-shadow:var(--shadow);text-align:right;font-weight:800}
 .checkout-btn{width:100%;margin-top:10px;padding:12px;border-radius:8px;background:var(--success);color:#fff;border:none;font-weight:700;cursor:pointer}
 
-.floating-cart{position:fixed;right:20px;bottom:20px;width:56px;height:56px;border-radius:50%;background:#fff;display:none;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(0,0,0,0.15);z-index:60;cursor:pointer}
+.floating-cart{
+position:fixed;
+right:20px;
+bottom:20px;
+width:56px;
+height:56px;
+border-radius:50%;
+background:#fff;
+display:none;
+align-items:center;
+justify-content:center;
+box-shadow:0 8px 20px rgba(0,0,0,0.15);
+z-index:60;
+cursor:pointer;
+font-size:24px;
+}
 .badge{position:absolute;top:-6px;right:-6px;background:#e63946;color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;transform-origin:center;transition:transform .18s cubic-bezier(.2,.9,.3,1)}
 
 .toast-wrap{position:fixed;left:50%;transform:translateX(-50%);bottom:90px;z-index:80;display:flex;flex-direction:column;gap:8px}
@@ -295,6 +311,7 @@ Voucher Alfamart Digital
 </section>
 
 <div class="floating-cart" id="floatingCart" onclick="openCart()">
+  🛒
   <div class="badge" id="cartBadge" style="display:none">0</div>
 </div>
 
@@ -457,12 +474,10 @@ function renderProducts() {
 } else {
   const btn = document.createElement('button');
   btn.textContent = 'Tambah';
-  btn.style.display = qty ? 'none' : 'block';
   btn.onclick = () => addThenShowQty(n);
 
   const qc = document.createElement('div');
   qc.className = 'qty-controls';
-  qc.style.display = qty ? 'flex' : 'none';
   qc.innerHTML = `
     <button onclick="changeQty('${currentBrand}',${n},-1)">−</button>
     <input type="number" value="${qty}" readonly>
@@ -471,6 +486,14 @@ function renderProducts() {
 
   card.appendChild(btn);
   card.appendChild(qc);
+      
+  if(qty){
+  btn.style.display = "none";
+  qc.style.display = "flex";
+}else{
+  btn.style.display = "block";
+  qc.style.display = "none";
+}
 }
 
 grid.appendChild(card);
