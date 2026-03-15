@@ -28,18 +28,25 @@ padding:16px
 
 .product-card{
 background:var(--card);
-border-radius:16px;
-padding:16px;
-box-shadow:0 8px 20px rgba(0,0,0,0.08);
+border-radius:18px;
+padding:18px;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
 display:flex;
 flex-direction:column;
 align-items:center;
 justify-content:center;
-transition:0.2s;
+transition:all .25s ease;
+position:relative;
+overflow:hidden;
 }
 
+.product-card[style*="pointer-events: none"]{
+filter:grayscale(30%);
+}
+  
 .product-card:hover{
-transform:translateY(-3px);
+transform:translateY(-5px);
+box-shadow:0 16px 30px rgba(0,0,0,0.12);
 }
 
 .product-card:active{
@@ -47,7 +54,12 @@ transform:scale(0.97);
 }
 .product-card .name{font-weight:700;margin-bottom:6px;text-align:center}
 .product-card .old{font-size:12px;text-decoration:line-through;color:var(--muted)}
-.product-card .new{font-weight:700;margin-bottom:8px}
+.product-card .new{
+font-weight:800;
+margin-bottom:8px;
+font-size:18px;
+letter-spacing:0.5px;
+}
 .product-card button{
 background:var(--primary);
 color:#fff;
@@ -84,13 +96,20 @@ width:100%;
 .qty-controls button{
 width:34px;
 height:34px;
-border-radius:6px;
-border:1px solid #ddd;
-background:#fff;
+border-radius:10px;
+border:none;
+background:#f1f3f5;
 cursor:pointer;
 font-size:18px;
-color:#111;
 font-weight:700;
+color:#333;
+box-shadow:0 3px 6px rgba(0,0,0,0.08);
+transition:0.2s;
+}
+
+.qty-controls button:hover{
+background:#e9ecef;
+transform:scale(1.05);
 }
 .qty-controls input{width:42px;padding:6px;border:1px solid #eee;border-radius:6px;text-align:center}
   
@@ -106,17 +125,22 @@ color:#111;
 position:fixed;
 right:20px;
 bottom:20px;
-width:56px;
-height:56px;
+width:60px;
+height:60px;
 border-radius:50%;
-background:#fff;
+background:#ffffff;
 display:none;
 align-items:center;
 justify-content:center;
-box-shadow:0 8px 20px rgba(0,0,0,0.15);
+box-shadow:0 12px 25px rgba(0,0,0,0.18);
 z-index:60;
 cursor:pointer;
 font-size:24px;
+transition:.25s;
+}
+
+.floating-cart:hover{
+transform:scale(1.08);
 }
 .badge{position:absolute;top:-6px;right:-6px;background:#e63946;color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;transform-origin:center;transition:transform .18s cubic-bezier(.2,.9,.3,1)}
 
