@@ -119,8 +119,7 @@ margin-bottom:18px;
 overflow:hidden;
 border-radius:16px;
 box-shadow:var(--shadow);
-height:480px;
-padding-bottom:20px;
+
 }
 
 .slides{
@@ -131,13 +130,11 @@ transition:transform 0.6s ease;
 
 .slide{
 min-width:100%;
+flex-shrink:0;
 padding:24px 16px;
 text-align:center;
 color:white;
-height:360px;
-display:flex;
-flex-direction:column;
-justify-content:center;
+min-height:520px;
 }
 
 /* ===== SLIDE WARNA ===== */
@@ -351,12 +348,11 @@ font-size:12px;
 
 .promo-btn{
 display:inline-block;
-margin-top:12px;
-margin-bottom:18px;
+margin-top:14px;
 background:white;
 color:#ff512f;
-padding:12px 22px;
-border-radius:24px;
+padding:12px 24px;
+border-radius:22px;
 font-weight:700;
 text-decoration:none;
 font-size:14px;
