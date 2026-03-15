@@ -74,7 +74,17 @@ transform:scale(0.95);
 .cart-item b{display:block}
 .small{color:var(--muted);font-size:13px;margin-top:6px}
 .qty-controls{display:flex;align-items:center;gap:6px;margin-top:8px}
-.qty-controls button{width:34px;height:34px;border-radius:6px;border:1px solid #ddd;background:#fff;cursor:pointer;font-size:18px}
+.qty-controls button{
+width:34px;
+height:34px;
+border-radius:6px;
+border:1px solid #ddd;
+background:#fff;
+cursor:pointer;
+font-size:18px;
+font-weight:700;
+line-height:1;
+}
 .qty-controls input{width:56px;padding:6px;border:1px solid #eee;border-radius:6px;text-align:center}
 
 .total-section{margin-top:12px;padding:14px;background:var(--card);border-radius:10px;box-shadow:var(--shadow);text-align:right;font-weight:800}
@@ -478,12 +488,11 @@ function renderProducts() {
 
   const qc = document.createElement('div');
   qc.className = 'qty-controls';
-  qc.innerHTML = `
-    <button onclick="changeQty('${currentBrand}',${n},-1)">−</button>
-    <input type="number" value="${qty}" readonly>
-    <button onclick="changeQty('${currentBrand}',${n},1)">+</button>
-  `;
-
+qc.innerHTML = `
+  <button onclick="changeQty('${currentBrand}',${n},-1)">-</button>
+  <input type="number" value="${qty}" readonly>
+  <button onclick="changeQty('${currentBrand}',${n},1)">+</button>
+`;
   card.appendChild(btn);
   card.appendChild(qc);
       
