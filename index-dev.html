@@ -206,15 +206,36 @@ box-shadow:0 8px 25px rgba(0,0,0,0.25);
 /* ===== JUDUL BANNER ===== */
 
 .promo-header{
-display:flex;
-align-items:center;
-justify-content:center;
-gap:12px;
+position:relative;
 font-size:22px;
 font-weight:900;
-margin-bottom:16px;
-color:#111;
 text-align:center;
+margin-bottom:18px;
+color:#111;
+}
+
+.promo-header::before{
+content:"";
+position:absolute;
+left:0;
+top:-10px;
+width:90px;
+height:70px;
+background:url("assets/ketupat.png") no-repeat;
+background-size:contain;
+opacity:0.9;
+}
+
+.promo-header::after{
+content:"";
+position:absolute;
+right:0;
+top:-10px;
+width:90px;
+height:70px;
+background:url("assets/ketupat.png") no-repeat;
+background-size:contain;
+opacity:0.9;
 }
 
 .ketupat{
@@ -471,13 +492,9 @@ font-size:14px;
 <div class="slides">
   
 <div class="slide promo-hot">
-
+  
 <div class="promo-header">
-<img src="assets/ketupat.png" class="ketupat kiri">
-
 PROMO BARANG POPULER
-
-<img src="assets/ketupat.png" class="ketupat kanan">
 </div>
 
 
