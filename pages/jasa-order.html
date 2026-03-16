@@ -339,13 +339,15 @@ let produk=document.getElementById("produk").value;
 let harga=document.getElementById("harga").value;
 let jumlah=document.getElementById("jumlah").value;
 let toko=document.getElementById("toko").value;
-let antrian = parseInt(localStorage.getItem("vq_antrian") || "0");
-antrian++;
 
-localStorage.setItem("vq_antrian", antrian);
+fetch("https://script.google.com/macros/s/AKfycbyLBNBj8N0n-rVgKiNpxDRfip29xYJly1-k-lDF31pvkBJJPSv7EcOojDQtkIMaf6aa/exec")
+.then(res => res.json())
+.then(data => {
 
-let orderId = "VQ-" + Math.floor(1000 + Math.random() * 9000);
-let pesan=
+let orderId = data.orderId;
+let antrian = data.antrian;
+
+let pesan =
 `ORDER JASA BELANJA VOUCHERQITA
 
 ORDER ID : ${orderId}
@@ -369,27 +371,9 @@ let url="https://api.whatsapp.com/send?phone=6285763492378&text="+encodeURICompo
 
 window.open(url);
 
-}
-
-function belumToko(){
-
-let url="https://api.whatsapp.com/send?phone=6285763492378&text="+encodeURIComponent(
-"Halo CS VoucherQita, saya ingin menggunakan jasa order Alfagift tetapi belum memiliki toko tujuan. Saya akan mengirim share lokasi saya."
-);
-  
-window.open(url);
+});
 
 }
-
-
-// TUTUP MODAL SAAT KLIK AREA GELAP
-window.onclick = function(event) {
-let modal = document.getElementById("modalForm");
-if (event.target == modal) {
-modal.style.display = "none";
-}
-}
-
 </script>
 </body>
 </html>
