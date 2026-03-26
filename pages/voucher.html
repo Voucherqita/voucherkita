@@ -639,28 +639,9 @@ function checkout() {
   }
 
   let totalQty = cart.reduce((s,i)=>s+i.qty,0);
-  let isMember = false;
 
-  // PASSWORD MEMBER
-  if(totalQty > 1){
-    let pass = prompt("Masukkan password member");
-
-    if(pass === "VK2026"){
-      isMember = true;
-    }else{
-      toast("Password salah. Pembelian lebih dari 1 hanya untuk member.");
-      return;
-    }
-  }
-
-  // LIMIT DEVICE (hanya untuk non member)
-  let today = new Date().toDateString();
-  let lastOrder = localStorage.getItem("vk_last_order");
-
-  if(!isMember && lastOrder === today){
-    toast("Perangkat ini sudah melakukan pemesanan hari ini.");
-    return;
-  }
+  // 🔥 PASSWORD + LIMIT DIMATIKAN TOTAL
+  let isMember = true;
 
   // BUAT ORDER ID
   let orderId = "VQ-" + Math.floor(1000 + Math.random() * 9000);
@@ -672,17 +653,13 @@ function checkout() {
     txt += `- ${i.brand} ${i.nominal.toLocaleString()} x${i.qty} = ${formatRp(i.qty*i.price)}\n`;
   });
 
-  // SIMPAN LIMIT DEVICE (hanya non member)
-  if(!isMember){
-    localStorage.setItem("vk_last_order", today);
-  }
+  window.open(
+    'wa.html?text=' + encodeURIComponent(txt),
+    '_blank'
+  );
 
-window.open(
-  'wa.html?text=' + encodeURIComponent(txt),
-  '_blank'
-);
+} // ✅ WAJIB ADA INI
 
-}
 
 function animateToCart(){
 
@@ -697,7 +674,6 @@ function animateToCart(){
   },250);
 
 }
-
 // ========================= INIT =========================
 setView('brand');
 updateCartBadge();
