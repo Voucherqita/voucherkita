@@ -284,20 +284,6 @@ transform:scale(1.08);
   border-color:#128C7E;
   background:#e9f7f5;
 }
-
-  .pay-option::before{
-  content:"";
-  width:16px;
-  height:16px;
-  border-radius:4px;
-  background:#16a34a; /* HIJAU */
-  display:inline-block;
-  margin-right:10px;
-}
-  .pay-option.online{
-  border:2px solid #16a34a;
-  background:#ecfdf5;
-}
 </style>
 </head>
 <body>
@@ -399,7 +385,7 @@ Silakan pilih metode yang aktif.
     <div class="pay-status" style="color:red;">Gangguan</div>
   </label>
 
-<label class="pay-option online" onclick="toggleDropdown(this,'vaDropdown')">
+ <label class="pay-option" onclick="toggleDropdown(this,'vaDropdown')">
   <div style="display:flex;align-items:center;">
     <div class="pay-icon va"></div>
     <div class="pay-text">Virtual Account</div>
@@ -437,7 +423,7 @@ Silakan pilih metode yang aktif.
     <div class="pay-status" style="color:red;">Gangguan</div>
   </label>
 
- <label class="pay-option online" onclick="toggleDropdown(this,'ewalletDropdown')">
+ <label class="pay-option" onclick="toggleDropdown(this,'ewalletDropdown')">
   <div style="display:flex;align-items:center;">
     <div class="pay-icon ewallet"></div>
     <div class="pay-text">E-Wallet</div>
@@ -807,10 +793,6 @@ function toggleDropdown(el, id){
 
   if(el.classList.contains('disabled')) return;
 
-  const dropdown = document.getElementById(id);
-  const isOpen = dropdown.classList.contains('show');
-
-  // reset semua
   document.querySelectorAll('.pay-option').forEach(e=>{
     e.classList.remove('active');
   });
@@ -819,10 +801,11 @@ function toggleDropdown(el, id){
     d.classList.remove('show');
   });
 
-  // kalau sebelumnya tertutup → buka
-  if(!isOpen){
-    el.classList.add('active');
-    dropdown.classList.add('show');
+  el.classList.add('active');
+
+  const dropdown = document.getElementById(id);
+  if(dropdown){
+    dropdown.classList.toggle('show');
   }
 }
 // ========================= INIT =========================
