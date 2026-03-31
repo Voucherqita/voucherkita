@@ -257,6 +257,33 @@ transform:scale(1.08);
 .cart-item.alfa button { background: transparent; color:#fff; border:1px solid rgba(255,255,255,0.14); }
 
 .cart-item .qty-controls button:hover { transform:scale(1.02); }
+
+/* 🔥 TEMPEL DI SINI */
+.va-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px;
+  border-radius:10px;
+  background:#fff;
+  margin-bottom:8px;
+  border:1px solid #eee;
+  cursor:pointer;
+}
+
+.va-item input{
+  transform:scale(1.2);
+}
+
+
+.va-item input:checked + span{
+  color:#128C7E;
+}
+
+.va-item:has(input:checked){
+  border-color:#128C7E;
+  background:#e9f7f5;
+}
 </style>
 </head>
 <body>
@@ -367,10 +394,27 @@ Silakan pilih metode yang aktif.
 </label>
 
 <div id="vaDropdown" class="pay-dropdown">
-  Virtual Account BCA<br>
-  Virtual Account Mandiri<br>
-  Virtual Account BRI<br>
-  Virtual Account BNI
+
+  <label class="va-item">
+    <span>Virtual Account BCA</span>
+    <input type="radio" name="va">
+  </label>
+
+  <label class="va-item">
+    <span>Virtual Account Mandiri</span>
+    <input type="radio" name="va">
+  </label>
+
+  <label class="va-item">
+    <span>Virtual Account BRI</span>
+    <input type="radio" name="va">
+  </label>
+
+  <label class="va-item">
+    <span>Virtual Account BNI</span>
+    <input type="radio" name="va">
+  </label>
+
 </div>
 
   <label class="pay-option disabled">
