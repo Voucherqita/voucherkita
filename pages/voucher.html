@@ -195,6 +195,7 @@ transform:scale(1.08);
   border:2px solid #e3e3e3;
   cursor:pointer;
   transition:0.2s;
+  opacity:1; /* INI PENTING */
 }
 
 .pay-option:hover{
@@ -209,8 +210,9 @@ transform:scale(1.08);
 .pay-option.disabled{
   opacity:0.5;
   cursor:not-allowed;
+  pointer-events: none; /* biar beneran gak bisa diklik */
 }
-
+  
 /* dropdown */
 .pay-dropdown{
   display:none;
