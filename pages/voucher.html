@@ -316,37 +316,52 @@ Voucher Alfamart Digital
   <div class="payment-section">
     <div class="pay-header">Metode Pembayaran</div>
     <div class="pay-sub">
-  Pembayaran otomatis sedang dalam perbaikan.<br>
-  Pemesanan tetap dapat diproses melalui WhatsApp Customer Service.
+ Metode pembayaran tersedia sebagian.<br>
+Silakan pilih metode yang aktif.
 </div>
 
-    <div class="pay-list">
-      <label class="pay-option disabled">
-        <div class="pay-icon bank"></div>
-        <div class="pay-text">Transfer Bank</div>
-        <div class="pay-status">Gangguan</div>
-      </label>
-      <label class="pay-option disabled">
-        <div class="pay-icon va"></div>
-        <div class="pay-text">Virtual Account</div>
-        <div class="pay-status">Gangguan</div>
-      </label>
-      <label class="pay-option disabled">
-        <div class="pay-icon qris"></div>
-        <div class="pay-text">QRIS</div>
-        <div class="pay-status">Gangguan</div>
-      </label>
-      <label class="pay-option disabled">
-        <div class="pay-icon indo"></div>
-        <div class="pay-text">Indomaret</div>
-        <div class="pay-status">Gangguan</div>
-      </label>
-      <label class="pay-option disabled">
-        <div class="pay-icon alfa"></div>
-        <div class="pay-text">Alfamart</div>
-        <div class="pay-status">Gangguan</div>
-      </label>
+   <div class="pay-list">
+
+  <label class="pay-option disabled">
+    <div class="pay-icon bank"></div>
+    <div class="pay-text">Transfer Bank</div>
+    <div class="pay-status" style="color:red;">Gangguan</div>
+  </label>
+
+  <label class="pay-option">
+    <div class="pay-icon va"></div>
+    <div class="pay-text">Virtual Account</div>
+    <div class="pay-status" style="color:green;">Aktif</div>
+  </label>
+
+  <label class="pay-option disabled">
+    <div class="pay-icon qris"></div>
+    <div class="pay-text">QRIS</div>
+    <div class="pay-status" style="color:red;">Gangguan</div>
+  </label>
+
+  <label class="pay-option">
+    <div class="pay-icon ewallet"></div>
+    <div class="pay-text">E-Wallet</div>
+    <div class="pay-status" style="color:green;">Aktif</div>
+    <div style="font-size:12px;color:#666;margin-top:4px;">
+      GoPay • i.Saku • LinkAja
     </div>
+  </label>
+
+  <label class="pay-option disabled">
+    <div class="pay-icon indo"></div>
+    <div class="pay-text">Indomaret</div>
+    <div class="pay-status" style="color:orange;">Segera Hadir</div>
+  </label>
+
+  <label class="pay-option disabled">
+    <div class="pay-icon alfa"></div>
+    <div class="pay-text">Alfamart</div>
+    <div class="pay-status" style="color:orange;">Segera Hadir</div>
+  </label>
+
+</div>
   </div>
 
   <button class="checkout-btn" onclick="checkout()">Lanjutkan Pemesanan via WhatsApp</button>
