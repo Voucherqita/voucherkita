@@ -189,12 +189,40 @@ transform:scale(1.08);
   display:flex;
   align-items:center;
   justify-content:space-between;
-  background:#f6f6f6;
+  background:#fff;
   padding:14px;
   border-radius:12px;
-  border:1px solid #e3e3e3;
-  opacity:0.6;
+  border:2px solid #e3e3e3;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.pay-option:hover{
+  border-color:#5b2c98;
+}
+
+.pay-option.active{
+  border-color:#128C7E;
+  background:#e9f7f5;
+}
+
+.pay-option.disabled{
+  opacity:0.5;
   cursor:not-allowed;
+}
+
+/* dropdown */
+.pay-dropdown{
+  display:none;
+  padding:10px 14px;
+  background:#f9f9f9;
+  border-radius:10px;
+  margin-top:6px;
+  font-size:13px;
+}
+
+.pay-dropdown.show{
+  display:block;
 }
 .pay-text{font-weight:600;font-size:14px;}
 .pay-status{font-size:12px;color:#b00;font-weight:700;}
@@ -328,11 +356,20 @@ Silakan pilih metode yang aktif.
     <div class="pay-status" style="color:red;">Gangguan</div>
   </label>
 
-  <label class="pay-option">
+ <label class="pay-option" onclick="toggleDropdown(this,'vaDropdown')">
+  <div style="display:flex;align-items:center;">
     <div class="pay-icon va"></div>
     <div class="pay-text">Virtual Account</div>
-    <div class="pay-status" style="color:green;">Aktif</div>
-  </label>
+  </div>
+  <div>▼</div>
+</label>
+
+<div id="vaDropdown" class="pay-dropdown">
+  Virtual Account BCA<br>
+  Virtual Account Mandiri<br>
+  Virtual Account BRI<br>
+  Virtual Account BNI
+</div>
 
   <label class="pay-option disabled">
     <div class="pay-icon qris"></div>
@@ -340,14 +377,19 @@ Silakan pilih metode yang aktif.
     <div class="pay-status" style="color:red;">Gangguan</div>
   </label>
 
-  <label class="pay-option">
+ <label class="pay-option" onclick="toggleDropdown(this,'ewalletDropdown')">
+  <div style="display:flex;align-items:center;">
     <div class="pay-icon ewallet"></div>
     <div class="pay-text">E-Wallet</div>
-    <div class="pay-status" style="color:green;">Aktif</div>
-    <div style="font-size:12px;color:#666;margin-top:4px;">
-      GoPay • i.Saku • LinkAja
-    </div>
-  </label>
+  </div>
+  <div>▼</div>
+</label>
+
+<div id="ewalletDropdown" class="pay-dropdown">
+  GoPay<br>
+  i.Saku<br>
+  LinkAja
+</div>
 
   <label class="pay-option disabled">
     <div class="pay-icon indo"></div>
@@ -688,6 +730,24 @@ function animateToCart(){
     cartIcon.style.transform = "scale(1)";
   },250);
 
+function toggleDropdown(el, id){
+
+  if(el.classList.contains('disabled')) return;
+
+  document.querySelectorAll('.pay-option').forEach(e=>{
+    e.classList.remove('active');
+  });
+
+  document.querySelectorAll('.pay-dropdown').forEach(d=>{
+    d.classList.remove('show');
+  });
+
+  el.classList.add('active');
+
+  const dropdown = document.getElementById(id);
+  if(dropdown){
+    dropdown.classList.toggle('show');
+  }
 }
 // ========================= INIT =========================
 setView('brand');
