@@ -307,7 +307,11 @@ transform:scale(1.08);
 
 <header>
   <div class="back-btn" onclick="goBack()">⬅️</div>
-  <div style="font-size:20px;font-weight:800;">VoucherQita</div>
+
+  <div onclick="goHome()" style="font-size:20px;font-weight:800;cursor:pointer;">
+    VoucherQita
+  </div>
+
   <div style="font-size:12px;opacity:0.9;">
     Voucher Digital Indomaret & Alfamart
   </div>
@@ -952,7 +956,12 @@ Pembayaran: ${pembayaran}
 
   window.open(url, '_blank');
 }
-
+  
+function goHome(){
+  setView('brand');
+  window.scrollTo(0,0);
+}
+  
 </script>
 
 <!-- POPUP -->
