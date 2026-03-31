@@ -418,7 +418,7 @@ Silakan pilih metode yang aktif.
 
   <div style="display:flex;flex-direction:column;">
     <span>Virtual Account BCA</span>
-    <button class="btn-bayar" style="display:none;">Bayar</button>
+ <button class="btn-bayar" onclick="openPopup()" style="display:none;">Bayar</button>
   </div>
 
   <input type="radio" name="va" onchange="pilihItem(this)">
@@ -429,7 +429,7 @@ Silakan pilih metode yang aktif.
 
   <div style="display:flex;flex-direction:column;">
     <span>Virtual Account Mandiri</span>
-    <button class="btn-bayar" style="display:none;">Bayar</button>
+    <button class="btn-bayar" onclick="openPopup()" style="display:none;">Bayar</button>
   </div>
 
   <input type="radio" name="va" onchange="pilihItem(this)">
@@ -440,7 +440,7 @@ Silakan pilih metode yang aktif.
 
   <div style="display:flex;flex-direction:column;">
     <span>Virtual Account BRI</span>
-    <button class="btn-bayar" style="display:none;">Bayar</button>
+    <button class="btn-bayar" onclick="openPopup()" style="display:none;">Bayar</button>
   </div>
 
   <input type="radio" name="va" onchange="pilihItem(this)">
@@ -451,7 +451,7 @@ Silakan pilih metode yang aktif.
 
   <div style="display:flex;flex-direction:column;">
     <span>Virtual Account BNI</span>
-    <button class="btn-bayar" style="display:none;">Bayar</button>
+    <button class="btn-bayar" onclick="openPopup()" style="display:none;">Bayar</button>
   </div>
 
   <input type="radio" name="va" onchange="pilihItem(this)">
@@ -483,7 +483,7 @@ Silakan pilih metode yang aktif.
 
     <div style="display:flex;flex-direction:column;">
       <span>GoPay</span>
-      <button class="btn-bayar" style="display:none;">Bayar</button>
+      <button class="btn-bayar" onclick="openPopup()" style="display:none;">Bayar</button>
     </div>
 
     <input type="radio" name="ewallet" onchange="pilihItem(this)">
@@ -494,7 +494,7 @@ Silakan pilih metode yang aktif.
 
     <div style="display:flex;flex-direction:column;">
       <span>i.Saku</span>
-      <button class="btn-bayar" style="display:none;">Bayar</button>
+      <button class="btn-bayar" onclick="openPopup()" style="display:none;">Bayar</button>
     </div>
 
     <input type="radio" name="ewallet" onchange="pilihItem(this)">
@@ -505,13 +505,12 @@ Silakan pilih metode yang aktif.
 
     <div style="display:flex;flex-direction:column;">
       <span>LinkAja</span>
-      <button class="btn-bayar" style="display:none;">Bayar</button>
+      <button class="btn-bayar" onclick="openPopup()" style="display:none;">Bayar</button>
     </div>
 
     <input type="radio" name="ewallet" onchange="pilihItem(this)">
 
   </label>
-
 </div>
      
 <label class="pay-option disabled">
@@ -894,4 +893,34 @@ function pilihItem(el){
     btn.style.display = "inline-block";
   }
 }
+  function openPopup(){
+  document.getElementById("popupBayar").style.display = "flex";
+}
+
+function closePopup(){
+  document.getElementById("popupBayar").style.display = "none";
+}
 </script>
+<div id="popupBayar" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center; z-index:999;">
+
+  <div style="background:#fff; padding:20px; border-radius:12px; text-align:center; width:90%; max-width:320px;">
+
+    <h3>Konfirmasi Dulu</h3>
+    <p>Harap konfirmasi ketersediaan voucher ke Customer Service</p>
+
+    <!-- WA (DISABLE) -->
+    <div style="margin:10px 0; padding:10px; background:#ccc; color:#666; border-radius:8px;">
+      WhatsApp (Tidak tersedia)
+    </div>
+
+    <!-- TELEGRAM (AKTIF) -->
+    <a href="https://t.me/username_telegram" target="_blank"
+       style="display:block; margin:10px 0; padding:10px; background:#229ED9; color:#fff; border-radius:8px; text-decoration:none;">
+      Lanjut ke Telegram
+    </a>
+
+    <button onclick="closePopup()" style="margin-top:10px;">Tutup</button>
+
+  </div>
+
+</div>
