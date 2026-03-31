@@ -288,6 +288,19 @@ transform:scale(1.08);
   color:#16a34a;
   font-weight:600;
 }
+  .va-item{
+  position:relative;
+}
+
+.btn-bayar{
+  margin-top:6px;
+  padding:5px 10px;
+  font-size:12px;
+  background:#16a34a;
+  color:#fff;
+  border:none;
+  border-radius:6px;
+}
 </style>
 </head>
 <body>
@@ -402,34 +415,58 @@ Silakan pilih metode yang aktif.
 <div id="vaDropdown" class="pay-dropdown">
 
   <label class="va-item">
+
+  <div style="display:flex;flex-direction:column;">
     <span>Virtual Account BCA</span>
-    <input type="radio" name="va">
-  </label>
+    <button class="btn-bayar" style="display:none;">Bayar</button>
+  </div>
 
-  <label class="va-item">
+  <input type="radio" name="va" onchange="pilihItem(this)">
+
+</label>
+
+<label class="va-item">
+
+  <div style="display:flex;flex-direction:column;">
     <span>Virtual Account Mandiri</span>
-    <input type="radio" name="va">
-  </label>
+    <button class="btn-bayar" style="display:none;">Bayar</button>
+  </div>
 
-  <label class="va-item">
+  <input type="radio" name="va" onchange="pilihItem(this)">
+
+</label>
+
+<label class="va-item">
+
+  <div style="display:flex;flex-direction:column;">
     <span>Virtual Account BRI</span>
-    <input type="radio" name="va">
-  </label>
+    <button class="btn-bayar" style="display:none;">Bayar</button>
+  </div>
 
-  <label class="va-item">
+  <input type="radio" name="va" onchange="pilihItem(this)">
+
+</label>
+
+<label class="va-item">
+
+  <div style="display:flex;flex-direction:column;">
     <span>Virtual Account BNI</span>
-    <input type="radio" name="va">
-  </label>
+    <button class="btn-bayar" style="display:none;">Bayar</button>
+  </div>
+
+  <input type="radio" name="va" onchange="pilihItem(this)">
+
+</label>
 
 </div>
 
-  <label class="pay-option disabled">
-    <div class="pay-icon qris"></div>
-    <div class="pay-text">QRIS</div>
-    <div class="pay-status" style="color:red;">Gangguan</div>
-  </label>
+<label class="pay-option disabled">
+  <div class="pay-icon qris"></div>
+  <div class="pay-text">QRIS</div>
+  <div class="pay-status" style="color:red;">Gangguan</div>
+</label>
 
- <label class="pay-option" onclick="toggleDropdown(this,'ewalletDropdown')">
+<label class="pay-option" onclick="toggleDropdown(this,'ewalletDropdown')">
   
   <div style="display:flex;align-items:center;">
     <div class="pay-icon ewallet"></div>
@@ -443,39 +480,58 @@ Silakan pilih metode yang aktif.
 <div id="ewalletDropdown" class="pay-dropdown">
 
   <label class="va-item">
-    <input type="radio" name="ewallet">
-    <span>GoPay</span>
+
+    <div style="display:flex;flex-direction:column;">
+      <span>GoPay</span>
+      <button class="btn-bayar" style="display:none;">Bayar</button>
+    </div>
+
+    <input type="radio" name="ewallet" onchange="pilihItem(this)">
+
   </label>
 
   <label class="va-item">
-    <input type="radio" name="ewallet">
-    <span>i.Saku</span>
+
+    <div style="display:flex;flex-direction:column;">
+      <span>i.Saku</span>
+      <button class="btn-bayar" style="display:none;">Bayar</button>
+    </div>
+
+    <input type="radio" name="ewallet" onchange="pilihItem(this)">
+
   </label>
 
   <label class="va-item">
-    <input type="radio" name="ewallet">
-    <span>LinkAja</span>
+
+    <div style="display:flex;flex-direction:column;">
+      <span>LinkAja</span>
+      <button class="btn-bayar" style="display:none;">Bayar</button>
+    </div>
+
+    <input type="radio" name="ewallet" onchange="pilihItem(this)">
+
   </label>
 
 </div>
      
-  <label class="pay-option disabled">
-    <div class="pay-icon indo"></div>
-    <div class="pay-text">Indomaret</div>
-    <div class="pay-status" style="color:orange;">Segera Hadir</div>
-  </label>
+<label class="pay-option disabled">
+  <div class="pay-icon indo"></div>
+  <div class="pay-text">Indomaret</div>
+  <div class="pay-status" style="color:orange;">Segera Hadir</div>
+</label>
 
-  <label class="pay-option disabled">
-    <div class="pay-icon alfa"></div>
-    <div class="pay-text">Alfamart</div>
-    <div class="pay-status" style="color:orange;">Segera Hadir</div>
-  </label>
+<label class="pay-option disabled">
+  <div class="pay-icon alfa"></div>
+  <div class="pay-text">Alfamart</div>
+  <div class="pay-status" style="color:orange;">Segera Hadir</div>
+</label>
 
 </div>
-  </div>
+</div>
 
-  <button class="checkout-btn" onclick="checkout()">Lanjutkan Pemesanan via WhatsApp</button>
-  <div style="margin-top:10px;text-align:center;font-size:12px;color:#666">
+<button class="checkout-btn" onclick="checkout()">Lanjutkan Pemesanan via WhatsApp</button>
+
+<div style="margin-top:10px;text-align:center;font-size:12px;color:#666">
   Customer Service aktif setiap hari<br>
   ⏰ 08.00 – 22.00 WIB
 </div>
@@ -825,4 +881,17 @@ function toggleDropdown(el, id){
 // ========================= INIT =========================
 setView('brand');
 updateCartBadge();
+function pilihItem(el){
+
+  document.querySelectorAll('.btn-bayar').forEach(btn=>{
+    btn.style.display = "none";
+  });
+
+  const parent = el.closest('.va-item');
+  const btn = parent.querySelector('.btn-bayar');
+
+  if(btn){
+    btn.style.display = "inline-block";
+  }
+}
 </script>
