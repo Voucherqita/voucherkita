@@ -880,6 +880,7 @@ function toggleDropdown(el, id){
 // ========================= INIT =========================
 setView('brand');
 updateCartBadge();
+
 function pilihItem(el){
 
   document.querySelectorAll('.btn-bayar').forEach(btn=>{
@@ -892,15 +893,69 @@ function pilihItem(el){
   if(btn){
     btn.style.display = "inline-block";
   }
+
+  // ambil metode pembayaran
+  metodeDipilih = parent.querySelector("span").innerText;
 }
-  function openPopup(){
+
+function openPopup(){
   document.getElementById("popupBayar").style.display = "flex";
 }
 
 function closePopup(){
   document.getElementById("popupBayar").style.display = "none";
 }
+
+function getTotalQty(){
+  let total = 0;
+
+  cart.forEach(item=>{
+    total += item.qty;
+  });
+
+  return total;
+}
+
+/* 🔥 TAMBAHAN AUTO CHAT */
+function kirimWA(){
+
+  let produk = "Voucher Belanja " + currentBrand;
+  let qty = getTotalQty();
+  let pembayaran = metodeDipilih;
+
+  let pesan = `Halo CS, saya mau order
+
+Produk: ${produk}
+Qty: ${qty}
+Pembayaran: ${pembayaran}
+`;
+
+  let url = "https://wa.me/6285763492378?text=" + encodeURIComponent(pesan);
+
+  window.open(url, '_blank');
+}
+
+function kirimTelegram(){
+
+  let produk = "Voucher Belanja " + currentBrand;
+  let qty = getTotalQty();
+  let pembayaran = metodeDipilih;
+
+  let pesan = `Halo CS, saya mau order
+
+Produk: ${produk}
+Qty: ${qty}
+Pembayaran: ${pembayaran}
+`;
+
+  let url = "https://t.me/voucherqita?text=" + encodeURIComponent(pesan);
+
+  window.open(url, '_blank');
+}
+
 </script>
+
+<!-- POPUP -->
 <div id="popupBayar" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center; z-index:999;">
 
   <div style="background:#fff; padding:20px; border-radius:12px; text-align:center; width:90%; max-width:320px;">
@@ -908,19 +963,19 @@ function closePopup(){
     <h3>Konfirmasi Dulu</h3>
     <p>Harap konfirmasi ketersediaan voucher ke Customer Service</p>
 
- <!-- WHATSAPP (AKTIF) -->
-<a href="https://wa.me/6285763492378" target="_blank"
-   style="display:block; margin:10px 0; padding:10px; background:#25D366; color:#fff; border-radius:8px; text-decoration:none; text-align:center;">
-  Lanjut ke WhatsApp
-</a>
+    <!-- WHATSAPP -->
+    <a href="#" onclick="kirimWA()" 
+       style="display:block; margin:10px 0; padding:10px; background:#25D366; color:#fff; border-radius:8px; text-decoration:none; text-align:center;">
+      Lanjut ke WhatsApp
+    </a>
 
-<!-- TELEGRAM (AKTIF) -->
-<a href="https://t.me/voucherqita" target="_blank"
-   style="display:block; margin:10px 0; padding:10px; background:#229ED9; color:#fff; border-radius:8px; text-decoration:none; text-align:center;">
-  Lanjut ke Telegram
-</a>
+    <!-- TELEGRAM -->
+    <a href="#" onclick="kirimTelegram()" 
+       style="display:block; margin:10px 0; padding:10px; background:#229ED9; color:#fff; border-radius:8px; text-decoration:none; text-align:center;">
+      Lanjut ke Telegram
+    </a>
 
-<button onclick="closePopup()" style="margin-top:10px;">Tutup</button>
+    <button onclick="closePopup()" style="margin-top:10px;">Tutup</button>
 
   </div>
 
