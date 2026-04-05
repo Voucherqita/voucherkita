@@ -640,6 +640,7 @@ function saveCart() {
 
 // ========================= STATE =========================
 let cart = loadCart();
+let metodeDipilih = "";
 let currentBrand = '';
 
 const $ = id => document.getElementById(id);
@@ -815,7 +816,11 @@ function renderCart(){
 }
 
 // ========================= CHECKOUT =========================
-function checkout() {
+  if(!metodeDipilih){
+  toast("Pilih metode pembayaran dulu bro");
+  return;
+}
+  function checkout() {
 
   if (!cart.length) {
     toast('Keranjang kosong');
@@ -830,20 +835,39 @@ function checkout() {
   // BUAT ORDER ID
   let orderId = "VQ-" + Math.floor(1000 + Math.random() * 9000);
 
-  let txt = 'ORDER ID : ' + orderId + '\n\n';
-  txt += 'Halo, saya ingin memesan voucher:\n';
+ let total = 0;
+let list = "";
 
-  cart.forEach(i => {
-    txt += `- ${i.brand} ${i.nominal.toLocaleString()} x${i.qty} = ${formatRp(i.qty*i.price)}\n`;
-  });
+cart.forEach(i=>{
+  let subtotal = i.qty * i.price;
+  total += subtotal;
 
-  window.open(
-    'wa.html?text=' + encodeURIComponent(txt),
-    '_blank'
-  );
+  list += `- ${i.brand} ${i.nominal.toLocaleString()} x${i.qty}\n`;
+});
 
-} // ✅ WAJIB ADA INI
+// 🔥 ORDER ID
+let orderId = "VQ" + Math.floor(100000 + Math.random()*900000);
 
+// 🔥 FORMAT BARU
+let txt =
+`ORDER VOUCHERQITA
+
+No HP: (isi manual)
+
+${list}
+
+Total: Rp ${total.toLocaleString("id-ID")}
+Metode Pembayaran: ${metodeDipilih}
+Kode Order: ${orderId}
+Expired: 10 Menit`;
+
+// 🔥 KIRIM WA
+window.open(
+  'wa.html?text=' + encodeURIComponent(txt),
+  '_blank'
+);
+
+}
 
 function animateToCart(){
 
