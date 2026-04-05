@@ -306,6 +306,7 @@ transform:scale(1.08);
 <body>
 
 <header>
+  <div id="countdown" style="text-align:center;font-weight:bold;margin:10px;color:#b00020"></div>
   <div class="back-btn" onclick="goBack()">⬅️</div>
 
   <div onclick="goHome()" style="font-size:20px;font-weight:800;cursor:pointer;">
@@ -555,6 +556,8 @@ Silakan pilih metode yang aktif.
 
 <script>
 
+const promoAktif = true; // 🔥 ubah ke false kalau promo selesai
+  
 // ambil elemen halaman
 const brandView = document.getElementById('brandView');
 const productsView = document.getElementById('productsView');
@@ -960,6 +963,90 @@ Pembayaran: ${pembayaran}
 function goHome(){
   window.location.href = "../index.html";
 }
+
+// 🔥 AUTO LOCK ORDER (FINAL BERSIH)
+function lockOrder(){
+
+if(!promoAktif) return;
+
+const now = new Date();
+const limit = new Date();
+limit.setHours(10,0,0,0);
+
+if(now >= limit){
+
+// matiin tombol tambah produk
+document.querySelectorAll(".product-card button").forEach(btn=>{
+  btn.disabled = true;
+  btn.style.background = "#999";
+});
+
+// matiin tombol checkout
+const checkoutBtn = document.querySelector(".checkout-btn");
+if(checkoutBtn){
+  checkoutBtn.innerHTML = "PROMO BERAKHIR";
+  checkoutBtn.style.background = "#999";
+  checkoutBtn.disabled = true;
+}
+
+}
+
+}
+setInterval(lockOrder,1000);
+lockOrder();
+
+// 🔒 AUTO MAINTENANCE (BERSIH)
+function maintenanceMode(){
+
+if(!promoAktif) return;
+
+const now = new Date();
+const maintenance = new Date();
+maintenance.setHours(10,30,0,0);
+
+if(now >= maintenance){
+
+document.body.innerHTML = `
+<div style="display:flex;justify-content:center;align-items:center;height:100vh;text-align:center;font-family:Poppins">
+<div>
+<h2>🚧 Website sedang maintenance</h2>
+<p>Silakan kembali nanti</p>
+</div>
+</div>
+`;
+
+}
+
+}
+setInterval(maintenanceMode,1000);
+maintenanceMode();
+
+  // ⏳ COUNTDOWN
+function updateCountdown(){
+
+if(!promoAktif) return;
+
+const now = new Date();
+const target = new Date();
+target.setHours(10,0,0,0);
+
+let diff = target - now;
+
+if(diff <= 0){
+document.getElementById("countdown").innerHTML = "Promo telah berakhir";
+return;
+}
+
+const h = Math.floor(diff/(1000*60*60));
+const m = Math.floor((diff%(1000*60*60))/(1000*60));
+const s = Math.floor((diff%(1000*60))/1000);
+
+document.getElementById("countdown").innerHTML =
+"⏳ Berakhir dalam: "+h+"j "+m+"m "+s+"d";
+}
+
+setInterval(updateCountdown,1000);
+updateCountdown();
   
 </script>
 
