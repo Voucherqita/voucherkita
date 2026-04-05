@@ -843,17 +843,14 @@ function renderCart(){
   let orderId = "VQ" + Math.floor(100000 + Math.random()*900000);
 
   // 🔥 FORMAT FINAL
-  let txt =
+ let txt =
 `ORDER VOUCHERQITA
-
-No HP: (isi manual)
 
 ${list}
 
 Total: Rp ${total.toLocaleString("id-ID")}
 Metode Pembayaran: ${metodeDipilih}
-Kode Order: ${orderId}
-Expired: 10 Menit`;
+Kode Order: ${orderId}`;
 
   // 🔥 KIRIM WA
   window.open(
