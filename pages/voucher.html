@@ -816,10 +816,6 @@ function renderCart(){
 }
 
 // ========================= CHECKOUT =========================
-  if(!metodeDipilih){
-  toast("Pilih metode pembayaran dulu bro");
-  return;
-}
  function checkout() {
 
   if (!cart.length) {
@@ -865,7 +861,6 @@ Expired: 10 Menit`;
     '_blank'
   );
 
-}
 }
 
 function animateToCart(){
