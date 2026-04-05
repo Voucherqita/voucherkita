@@ -547,7 +547,7 @@ Rp 90.000
 </div>
 
 <div class="desc">
-Periode 01 – 05 April 2026
+Berlaku hingga pukul 10.00 WIB
 </div>
 
 <div class="desc">
@@ -874,14 +874,11 @@ function updateCountdown(){
 
 const now = new Date();
 
-const promoEnd = new Date(
-now.getFullYear(),
-now.getMonth(),
-now.getDate()+2,
-0,0,0
-);
+// TARGET JAM 10:00 WIB HARI INI
+const target = new Date();
+target.setHours(10,0,0,0);
 
-let distance = promoEnd - now;
+let distance = target - now;
 
 if(distance <= 0){
 countdownEl.innerHTML = "PROMO SELESAI";
@@ -895,10 +892,9 @@ const seconds = Math.floor((distance % (1000*60)) / 1000);
 const pad = n => n.toString().padStart(2,'0');
 
 countdownEl.innerHTML =
-pad(hours) + ":" + pad(minutes) + ":" + pad(seconds);
+"⏳ " + pad(hours)+":"+pad(minutes)+":"+pad(seconds);
 
 }
-
 updateCountdown();
 setInterval(updateCountdown,1000);
 
@@ -946,5 +942,54 @@ updateDots();
 }
   
 createDots();
-  
+
+  // 🔥 AUTO DISABLE ORDER
+function checkPromo(){
+
+const now = new Date();
+const limit = new Date();
+limit.setHours(10,0,0,0);
+
+if(now >= limit){
+
+const btns = document.querySelectorAll(".slide-btn");
+
+btns.forEach(btn=>{
+  btn.innerHTML = "PROMO BERAKHIR";
+  btn.style.background = "#999";
+  btn.style.pointerEvents = "none";
+});
+
+}
+
+}
+
+setInterval(checkPromo,1000);
+checkPromo();
+
+// 🔒 AUTO MAINTENANCE
+function maintenanceMode(){
+
+const now = new Date();
+const maintenance = new Date();
+maintenance.setHours(10,30,0,0);
+
+if(now >= maintenance){
+document.body.innerHTML = "";
+document.body.style.display = "flex";
+document.body.style.justifyContent = "center";
+document.body.style.alignItems = "center";
+document.body.style.height = "100vh";
+document.body.innerHTML = `
+<div style="text-align:center;font-family:sans-serif">
+<h2>Website sedang maintenance</h2>
+<p>Silakan kembali nanti</p>
+</div>
+`;
+}
+
+}
+
+setInterval(maintenanceMode,1000);
+maintenanceMode();
 </script>
