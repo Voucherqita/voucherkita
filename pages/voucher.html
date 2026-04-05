@@ -820,36 +820,34 @@ function renderCart(){
   toast("Pilih metode pembayaran dulu bro");
   return;
 }
-  function checkout() {
+ function checkout() {
 
   if (!cart.length) {
     toast('Keranjang kosong');
     return;
   }
 
-  let totalQty = cart.reduce((s,i)=>s+i.qty,0);
+  // 🔥 VALIDASI METODE
+  if(!metodeDipilih){
+    toast("Pilih metode pembayaran dulu bro");
+    return;
+  }
 
-  // 🔥 PASSWORD + LIMIT DIMATIKAN TOTAL
-  let isMember = true;
+  let total = 0;
+  let list = "";
 
-  // BUAT ORDER ID
-  let orderId = "VQ-" + Math.floor(1000 + Math.random() * 9000);
+  cart.forEach(i=>{
+    let subtotal = i.qty * i.price;
+    total += subtotal;
 
- let total = 0;
-let list = "";
+    list += `- ${i.brand} ${i.nominal.toLocaleString()} x${i.qty}\n`;
+  });
 
-cart.forEach(i=>{
-  let subtotal = i.qty * i.price;
-  total += subtotal;
+  // 🔥 ORDER ID (CUKUP 1)
+  let orderId = "VQ" + Math.floor(100000 + Math.random()*900000);
 
-  list += `- ${i.brand} ${i.nominal.toLocaleString()} x${i.qty}\n`;
-});
-
-// 🔥 ORDER ID
-let orderId = "VQ" + Math.floor(100000 + Math.random()*900000);
-
-// 🔥 FORMAT BARU
-let txt =
+  // 🔥 FORMAT FINAL
+  let txt =
 `ORDER VOUCHERQITA
 
 No HP: (isi manual)
@@ -861,12 +859,13 @@ Metode Pembayaran: ${metodeDipilih}
 Kode Order: ${orderId}
 Expired: 10 Menit`;
 
-// 🔥 KIRIM WA
-window.open(
-  'wa.html?text=' + encodeURIComponent(txt),
-  '_blank'
-);
+  // 🔥 KIRIM WA
+  window.open(
+    'wa.html?text=' + encodeURIComponent(txt),
+    '_blank'
+  );
 
+}
 }
 
 function animateToCart(){
