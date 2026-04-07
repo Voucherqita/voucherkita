@@ -640,6 +640,11 @@ function saveCart() {
 
 // ========================= STATE =========================
 let cart = loadCart();
+  // 🔥 SYNC HARGA DENGAN PROMO TERBARU
+cart.forEach(item => {
+  item.price = PRICE_PROMO[item.nominal] || item.price;
+});
+saveCart();
 let metodeDipilih = "";
 let currentBrand = '';
 
