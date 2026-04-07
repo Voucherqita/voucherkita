@@ -459,6 +459,38 @@ font-size:14px;
   100%{transform:translateY(0)}
 }
 
+.promo-card{
+  background: linear-gradient(135deg, #1f7a3a, #2ecc71);
+  color:white;
+  padding:25px;
+  border-radius:16px;
+  max-width:320px;
+  margin:auto;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+.voucher{
+  font-size:14px;
+  opacity:0.9;
+}
+
+.period{
+  font-size:12px;
+  margin-top:6px;
+}
+
+.btn{
+  display:block;
+  margin-top:15px;
+  background:#fff;
+  color:#ff4d4d;
+  padding:10px;
+  border-radius:20px;
+  font-weight:bold;
+  text-decoration:none;
+}
+
 </style>
 </head>
 
@@ -529,60 +561,26 @@ KLIK DISINI
 <!-- 2. PROMO VOUCHER (YANG KAMU MAU) -->
 <div class="slide promo-lebaran">
 
-<div class="title">
-SPESIAL APRIL DEAL
+<div class="promo-card">
+  <div class="title">APRIL SPECIAL OFFER</div>
+  
+  <div class="voucher">Voucher 100.000</div>
+  
+  <div class="price">Rp 89.000</div>
+  
+  <div class="period">
+    Periode 07 – 13 April 2026
+  </div>
+  
+  <div class="desc">
+    Penawaran terbatas • Nikmati harga terbaik minggu ini
+  </div>
+  
+  <a href="pages/voucher.html" class="btn">
+    ORDER SEKARANG
+  </a>
 </div>
-
-<div class="desc">
-Voucher 100.000
-</div>
-
-<div class="price" style="
-font-size:36px;
-font-weight:800;
-color:#ffd700;
-text-shadow:0 2px 10px rgba(0,0,0,0.3);
-">
-Rp 90.000
-</div>
-
-<div class="desc">
-Berlaku hingga pukul 10.00 WIB
-</div>
-
-<div class="desc">
-Promo terbatas • Jangan sampai kehabisan
-</div>
-
-<a href="pages/voucher.html" class="slide-btn">
-ORDER SEKARANG
-</a>
-
-</div>
-
-<!-- 3. JASA ORDER -->
-<div class="slide promo0">
-
-<div class="icon">🛒</div>
-
-<div class="title">
-MALAS BELANJA?
-</div>
-
-<div class="desc">
-BIAR KAMI YANG ORDER
-</div>
-
-<div class="desc">
-ALFAGIFT UNTUK ANDA
-</div>
-
-<a href="pages/jasa-order.html" class="slide-btn">
-ORDER SEKARANG
-</a>
-
-</div>
-
+  
 <!-- 4. RESELLER -->
 <div class="slide promo2">
 
@@ -943,51 +941,17 @@ updateDots();
   
 createDots();
 
-  // 🔥 AUTO DISABLE ORDER
+// 🔥 AUTO DISABLE ORDER (DIMATIKAN TOTAL)
 function checkPromo(){
-
-const now = new Date();
-const limit = new Date();
-limit.setHours(10,0,0,0);
-
-if(now >= limit){
-
-const btns = document.querySelectorAll(".slide-btn");
-
-btns.forEach(btn=>{
-  btn.innerHTML = "PROMO BERAKHIR";
-  btn.style.background = "#999";
-  btn.style.pointerEvents = "none";
-});
-
-}
-
+  return;
 }
 
 setInterval(checkPromo,1000);
 checkPromo();
 
-// 🔒 AUTO MAINTENANCE
+// 🔒 AUTO MAINTENANCE (DIMATIKAN TOTAL)
 function maintenanceMode(){
-
-const now = new Date();
-const maintenance = new Date();
-maintenance.setHours(10,30,0,0);
-
-if(now >= maintenance){
-document.body.innerHTML = "";
-document.body.style.display = "flex";
-document.body.style.justifyContent = "center";
-document.body.style.alignItems = "center";
-document.body.style.height = "100vh";
-document.body.innerHTML = `
-<div style="text-align:center;font-family:sans-serif">
-<h2>Website sedang maintenance</h2>
-<p>Silakan kembali nanti</p>
-</div>
-`;
-}
-
+  return;
 }
 
 </script>
