@@ -738,6 +738,28 @@ Batal
 
 <script>
 
+// 🔒 MODE OFF / TUTUP WEBSITE
+const siteLock = true;
+
+if(siteLock){
+  document.body.innerHTML = `
+  <div style="
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    font-family:Poppins,sans-serif;
+    text-align:center;
+    padding:20px;
+  ">
+    <div>
+      <h2>Website sementara tidak tersedia</h2>
+      <p>Silakan kembali beberapa saat lagi 🙏</p>
+    </div>
+  </div>
+  `;
+}
+
 /* ===== SLIDER ===== */
 
 let slideIndex = 0;
